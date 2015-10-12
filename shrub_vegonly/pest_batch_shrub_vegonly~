@@ -1,0 +1,7 @@
+#!/bin/bash
+cd ~/jul2015check/dvm-dos-tem/
+./dvmdostem --cal-mode -l note
+
+cd ~/Desktop/pest/shrub_vegonly/
+rm TEM_Pest_Output_rh.txt
+R CMD BATCH pest_processing_rh.r
