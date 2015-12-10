@@ -1,9 +1,9 @@
 # Basic tutorial for putting together a pest run
 
-Original Author: Vijay Patil, Oct 11 2015
-Modified/Expanded: Tobey Carman, Dec 10 2015
+* Original Author: Vijay Patil, Oct 11 2015
+* Modified/Expanded: Tobey Carman, Dec 10 2015
 
-## Steps to creating a pest run
+## Background
 
 This presumes that you have downloaded pest from www.pesthomepage.org, installed and compiled the program, and worked through some of the documents in the pestdocs folder that I distributed:
 
@@ -20,19 +20,45 @@ This was the case for me. so: `/home/vijay/Desktop/pest/shrub_veg/shrub_veg.pst`
 
 > Update - oct 11 2015. now pest commands are running from every directory. Don't know what happened differently. If this is the case for everyone, then we can do away with the obnoxious long path names.
 
-###
-hmmm
-
+## Steps to creating a pest run
 
 ### Naming conventions
 Pest requires a number of special files, and we have found it helpful to group the files for a certain calibration run by using a naming convention. So for example pre-fixing each file with something like `shrub_vegonly_`. Then all files for a certain run will also go into a named sub-folder within your working directory (pest folder).
 
+### Files
+
+File | Required | Generated | Helper Scripts
+--------------------------------------------
+runname-prefix.ins | X  | |
+runname-prefix_<cmt_bgcvegetation>.tpl | X  | |
+runname-prefix_create_ins.r | | X |
+.??? | X  | |
+.??? | X  | |
+.??? | X  | |
+.??? | X  | |
+
+
+
 ### Required Files
-1. `.ins` - the pest "instruction file"; tells pest to ....??
-2. `.tpl` - the pest "template file"; tells pest to.....?
-3. `.R` - an R script (that we wrote) that helps translate our outputs into an easier format for creating the pest template file.
-4.
-5.
+1. `.tpl` - the pest "template file(s)"; tells pest how to read the parameters from the models parameter input files and which values to replace (parameterize)
+2. `.ins` - the pest "instruction file(s?)"; tells pest how to read the model's output files and find values that it will check against observations or desired values.
+3. `??` - ??
+
+### Helper Scripts
+1. `.R` - an R script (that we wrote) that helps translate our outputs into an easier format for creating the pest template file.
+2.
+3.
+
+### Generated files
+
+-----------------------
+
+### Workflow
+
+1. Decide which value / parameters you'd like to calibrate. In general, these will be select values that you find in the `dvmdostem/parameters/cmt_calparbgc.txt` file, although due to the architecture of PEST and `dvmdostem`, there are actually many other things that can be treated as parameters, such as the calibration directives.
+
+2. Write the template file(s) (`.tpl`). 
+3. Check the template file(s) using 
 
 
 1. make sure that pest_processing_xx.r creates desired summary of output vals from data
