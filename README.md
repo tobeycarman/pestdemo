@@ -28,7 +28,7 @@ Pest requires a number of special files, and we have found it helpful to group t
 ### Files
 
 File | Required | Generated | Helper Scripts
---------------------------------------------
+-----|----------|-----------|---------------
 runname-prefix.ins | X  | |
 runname-prefix_<cmt_bgcvegetation>.tpl | X  | |
 runname-prefix_create_ins.r | | X |
