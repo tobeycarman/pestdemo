@@ -5,7 +5,7 @@
 
 ## Background
 
-This presumes that you have downloaded pest from www.pesthomepage.org, installed and compiled the program, and worked through some of the documents in the pestdocs folder that I distributed:
+This presumes that you have downloaded pest from www.pesthomepage.org, installed and compiled the program, and worked through some of the documents in the `pestdocs/` folder:
 
 1. `unixpest.pdf` - instructions for compiling under linux.
 2. `pestman` - comprehensive manual by the creators of the software.
@@ -14,51 +14,91 @@ This presumes that you have downloaded pest from www.pesthomepage.org, installed
 
 Included are a set of files for an example pest run that is trying to calibrate vegetation-specific parameters for 9 pfts in a boreal deciduous-shrub community. These files will need to be modified carefully to fit your needs.
 
-> Note: It seems like file locations have to be specified with absolute, non-symbolic paths to work. 
-This was the case for me. so: `/home/vijay/Desktop/pest/shrub_veg/shrub_veg.pst` for the relevant pest control file.
+> Note: It seems like file locations have to be specified with absolute, non-symbolic paths to work. So: `/home/vijay/Desktop/pest/shrub_veg/shrub_veg.pst` for the relevant pest control file.
 > Note: If path + filename is too long, pest may throw an error. Try shortening file names.
 
-> Update - oct 11 2015. now pest commands are running from every directory. Don't know what happened differently. If this is the case for everyone, then we can do away with the obnoxious long path names.
+> Update - Oct 11 2015. Now pest commands are running from every directory. Don't know what happened differently. If this is the case for everyone, then we can do away with the obnoxious long path names.
 
-## Steps to creating a pest run
+## Naming conventions
 
-### Naming conventions
-Pest requires a number of special files, and we have found it helpful to group the files for a certain calibration run by using a naming convention. So for example pre-fixing each file with something like `shrub_vegonly_`. Then all files for a certain run will also go into a named sub-folder within your working directory (pest folder).
+Pest requires a number of special files, and we have found it helpful to group the files for a certain calibration run by using a naming convention. So for example pre-fixing each file used in a particular calibration run or suite of runs with some kind of `case-name`. In fact, this convention is partially enforced by PEST - the name of the "control file" (with extension `.pst`) is used as the "case name" and all the output files are named using this "case name". We have extended the pattern to mark the input files and the helper script files that we created for running pest.
 
-### Files
+Additionally, all files for a certain run will go into a named folder within your working directory (pest folder?). 
 
-File | Required | Generated | Helper Scripts
------|----------|-----------|---------------
-runname-prefix.ins | X  | |
-runname-prefix_<cmt_bgcvegetation>.tpl | X  | |
-runname-prefix_create_ins.r | | X |
-.??? | X  | |
-.??? | X  | |
-.??? | X  | |
-.??? | X  | |
+## Table of files
+
+File                           | Input Files      | Generated | Helper Scripts|
+-------------------------------|------------------|-----------|---------------|
+`<case-name>_create_ins.r`     |                  |           |       X       |
+`<case-name>.ins`              |   required       |     X     |               |
+`<case-name>_cmt_calparbgc.tpl`|   required       |           |               |
+`parameters/cmt_calparbgc.txt` |   required       |           |               |
+`<case-name>.pst`              |   required       |     X*    |               |
+`<case-name>_pest_processing.r`|                  |           |       X       |
+`<case-name>_output.csv`       |                  |     X     |               |
+`<case-name>.rec`              |                  |     X     |               |
+`<case-name>.jac`              |                  |     X     |               |
+`<case-name>.jst`              |                  |     X     |               |
+`<case-name>.sen`              |                  |     X     |               |
+`<case-name>.jco`              |                  |     X     |               |
+`<case-name>.prf`              |                  |     X     |               |
+`<case-name>.rei`              |                  |     X     |               |
+`<case-name>.res`              |                  |     X     |               |
+`<case-name>.mtt`              |                  |     X     |               |
+`<case-name>.obf`              |                  |     X     |               |
+`<case-name>.par`              |                  |     X     |               |
+`<case-name>.rst`              |                  |     X     |               |
+`<case-name>.rmf`              |     optional     |     X     |               |
+`<case-name>.hld`              |     optional     |     X     |               |
+`generate-pest-case.py`        |                  |           |        X      |
 
 
+> *The pest control file can be generated using the `PESTGEN` utility program or written by hand.
 
-### Required Files
-1. `.tpl` - the pest "template file(s)"; tells pest how to read the parameters from the models parameter input files and which values to replace (parameterize)
-2. `.ins` - the pest "instruction file(s?)"; tells pest how to read the model's output files and find values that it will check against observations or desired values.
-3. `??` - ??
+### Required Input Files
+1. `<case-name>_cmt_calparbgc.tpl` - The pest "template file(s)"; tells pest how to read the parameters from the model's parameter input files and which values to replace (parameterize). There could be more than one template file, if for example you decided to calibrate a value in one of the other `parameters/cmt_xxxx.txt` files.
+2. `<case-name>.ins` - The pest "instruction file(s?)"; tells pest how to read the model's output files and find values that it will check against observations or desired values.
+3. `<case-name>.pst` - The pest control file; tells pest how to run the model and contains much information for "tuning" pest's operation.
+4. `parameters/cmt_calparbgc.txt` - The dvmdostem parameter file holding values that should be calibrated. You shouldn't need a duplicate of this file - you will tell pest where to look for the parameter file (which is typically in `dvmdostem`'s `parameters/` directory).
+
+### Optional Input Files
+1. `<case-name>.rmf` - Parallel PEST run management file; user supplied input file.
+2. `<case-name>.hld` - The “parameter hold file”; user supplied input file.
+
 
 ### Helper Scripts
-1. `.R` - an R script (that we wrote) that helps translate our outputs into an easier format for creating the pest template file.
-2.
-3.
+1. `<case-name>_pest_processing.r` - an R script (that we wrote) that helps translate our model outputs (the `.json` files generated when the model is run in calibration mode) into an easier format for creating the pest template file. This script could be written in with Python or bash, or any number of other languages. 
+2. `<case-name>_create_ins.r` - Tells pest how to interpret an output file and how to extract values associated with output variables.
+3. `generate-pest-case.py` (NOT IMPLEMENTED YET) - This utility could generate a folder with a bunch of appropriately named files for a particular pest case.
 
 ### Generated files
+1. `<case-name>_output.csv` - The simplified model outputs containing just the values to be compared against observed values; this file is generated by the `<case-name>_pest_processing.r` script after the model runs. 
+2. `<case-name>.rec` - The "run record file".
+3. `<case-name>.jac` - The Jacobian matrix for a possible restart.
+4. `<case-name>.jst` - The same file from the previous optimisation iteration.
+5. `<case-name>.sen` - The parameter sensitivities.
+6. `<case-name>.jco` - The Jacobian matrix pertaining to the best parameters for access by the JACWRIT utility.
+7. `<case-name>.prf` - A special Parallel PEST restart file.
+8. `<case-name>.rei` - Interim observation residuals.
+9. `<case-name>.res` - Tabulated observation residuals.
+10. `<case-name>.mtt` - Interim covariance matrix and related matrices.
+11. `<case-name>.obf` - The observation sensitivities.
+12. `<case-name>.rst` - The restart information stored at the beginning of each optimisation iteration.
+13. `<case-name>.par` - The best parameter values achieved.
 
------------------------
 
-### Workflow
+<hr>
+<hr>
+
+## Steps to creating a pest run (workflow)
 
 1. Decide which value / parameters you'd like to calibrate. In general, these will be select values that you find in the `dvmdostem/parameters/cmt_calparbgc.txt` file, although due to the architecture of PEST and `dvmdostem`, there are actually many other things that can be treated as parameters, such as the calibration directives.
-
+1. Choose a 'case name'.
+2. Make a folder to hold the pest files for this pest run, and generate the required input files.
 2. Write the template file(s) (`.tpl`). 
-3. Check the template file(s) using 
+3. Check the template file(s) using `TEMPCHEK`.
+4. Write the instruction file(s) (`.ins`). This can be written by hand or generated using our helper script `<case-name>-create-pest-ins.r`, or another helper script that you may write.
+5. Check the instruction file with `PESTCHEK` and `INSCHEK`.
 
 
 1. make sure that pest_processing_xx.r creates desired summary of output vals from data
