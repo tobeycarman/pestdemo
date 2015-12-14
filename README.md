@@ -1,4 +1,4 @@
-# Basic tutorial for putting together a pest run
+# Basic tutorial for putting together a dvmdostem pest run
 
 * Original Author: Vijay Patil, Oct 11 2015
 * Modified/Expanded: Tobey Carman, Dec 10 2015
@@ -19,7 +19,7 @@ Included are a set of files for an example pest run that is trying to calibrate 
 
 > Update - Oct 11 2015. Now pest commands are running from every directory. Don't know what happened differently. If this is the case for everyone, then we can do away with the obnoxious long path names.
 
-> Note: The convention we use for `dvmdostem` is that "input files" are the NetCDF files while "parameter files" are the text files in the `parameters` directory. This can me confusing when reading the Pest documentation because they use "Model Input Files" to refer to what we call "parameter files".
+> Note: The convention we use for `dvmdostem` is that "input files" are the NetCDF files while "parameter files" are the text files in the `parameters` directory. This can be confusing when reading the Pest documentation because they use "Model Input Files" to refer to what we call "parameter files".
 
 ## Naming conventions
 
@@ -94,13 +94,13 @@ File                           | Input Files      | Generated | Helper Scripts|
 
 ## Steps to creating a pest run (workflow)
 
-1. Decide which value / parameters you'd like to calibrate. In general, these will be select values that you find in the `dvmdostem/parameters/cmt_calparbgc.txt` file, although due to the architecture of PEST and `dvmdostem`, there are actually many other things that can be treated as parameters, such as the calibration directives, and any of the other values found in any of the files in the `dvmdostem/parameters/` directory.
-1. Choose a 'case name'.
-2. Make a folder to hold the pest files for this pest run, and generate the required input files.
+1. Decide which values/parameters you'd like to calibrate. In general, these will be select values that you find in the `dvmdostem/parameters/cmt_calparbgc.txt` file, although due to the architecture of PEST and `dvmdostem`, there are actually many other things that can be treated as parameters, such as the calibration directives, and any of the other values found in any of the files in the `dvmdostem/parameters/` directory.
+1. Choose a 'case name', such as "shrub-vegonly".
+2. Make a folder to hold the pest files for this pest run case.
 2. Write the template file(s) (`.tpl`). 
 3. Check the template file(s) using `TEMPCHEK`.
-4. Further check your template file by supplying `TEMPCHEK` with a set of parameter values and letting `TEMPCHEK` write an 'model input' (parameter) file. Then you can run dvmdostem with this file to make sure that the values are being substituted into the template correctly.
-5. Use the `<case-name>-pest-processing.r` script to read the model outputs, (`.json` files generated in when running in calibration mode), and create a simplified version of the outputs that will be easier to parse with in the pest instruction file. Variable names should include pft numbers if pft-specific. One possibility for the simplified output format is like this:
+4. Further check your template file by supplying `TEMPCHEK` with a set of parameter values and letting `TEMPCHEK` write a 'model input' (parameter) file. Then you can run dvmdostem with the generated parameter file to make sure that the values are being substituted into the template correctly.
+5. Use the `<case-name>-pest-processing.r` script to read the model outputs, (`.json` files generated when running `dvmdostem` in calibration mode), and create a simplified version of the outputs that will be easier to parse in the pest instruction file. Variable names should include pft numbers if pft-specific. One possibility for the simplified output format is like this:
 ```
 Variable,Value
 GPPAll0,110.7451347285
@@ -108,21 +108,17 @@ NPPAll0,55.3725673643
 ...
 ```
 > Note, this step is not strictly necessary, but because of the rather primitive and tedious methods available in the pest instruction file (navigating by line and characther position), it will probbaly be easier and more reliable to parse a simplifed text file rather than the `.json` files.
-6. Write the instruction file(s) (`.ins`). This can be written by hand or generated using our helper script `<case-name>-create-pest-ins.r`, or another helper script that you may write. Make sure that the instruction file matches the output file
+6. Write the instruction file(s) (`.ins`). This can be written by hand or generated using our helper script `<case-name>-create-pest-ins.r`, or another helper script that you may write. Make sure that the instruction file matches the output file.
 7. Check the instruction file with `PESTCHEK` and `INSCHEK`.
-
-```bash
-# generates a `.obf` file with just the observation names
-$ inschek <case-name>.ins 
-
-# generates an `.obf` file with obs names/values
-$ inschek <case-name>.ins <model output csv>
-```
 
 8. Use `PESTGEN` to create a start at a control file (`.pst`).
 
+> `$ inschek <case-name>.ins`
 
-<hr>
+> `$ inschek <case-name>.ins <model output>.csv`
+
+
+<hr><hr>
 
 
 
