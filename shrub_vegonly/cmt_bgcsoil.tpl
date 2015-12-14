@@ -159,12 +159,12 @@ ptf #
 0.346	          // som2co2:
 0.0042	          // kn2:
 29.73	          // nmincnsoil:
-0.2	          // propftos:
-0	          // fnloss:  fraction N leaching (0 - 1) when drainage occurs
-5	             // initdmossc:
-25486.388	           // initshlwc:
-23122.867	             // initdeepc:
-28065.629	              // initminec:
-7942.156	             // initsoln:
-0.4396944	          // initavln:
+0.2	              // propftos:
+0	              // fnloss:  fraction N leaching (0 - 1) when drainage occurs
+5	              // initdmossc:
+25486.388	      // initshlwc:
+23122.867	      // initdeepc:
+28065.629	      // initminec:
+7942.156	      // initsoln:
+0.4396944	      // initavln:
 
