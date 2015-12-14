@@ -23,7 +23,9 @@ Included are a set of files for an example pest run that is trying to calibrate 
 
 ## Naming conventions
 
-Pest requires a number of special files, and we have found it helpful to group the files for a certain calibration run by using a naming convention. So for example pre-fixing each file used in a particular calibration run or suite of runs with some kind of `case-name`. In fact, this convention is partially enforced by PEST - the name of the "control file" (with extension `.pst`) is used as the "case name" and all the output files are named using this "case name". We have extended the pattern to mark the input files and the helper script files that we created for running pest.
+Generally any generated files will have the "case name" as a pre-fix to the filename. The "case name" will usually be the same as the directory name for all the files related to a pest run.
+
+This convention is partially enforced by PEST - the name of the "control file" (with extension `.pst`) is used as the "case name" and all the output files are named using this "case name".
 
 Additionally, all files for a certain run will go into a named folder within your working directory (pest folder?). 
 
@@ -31,13 +33,14 @@ Additionally, all files for a certain run will go into a named folder within you
 
 File                           | Input Files      | Generated | Helper Scripts|
 -------------------------------|------------------|-----------|---------------|
-`<case-name>_create_ins.r`     |                  |           |       X       |
-`<case-name>.ins`              |   required       |     X     |               |
-`<case-name>_cmt_calparbgc.tpl`|   required       |           |               |
 `parameters/cmt_calparbgc.txt` |   required       |           |               |
-`<case-name>.pst`              |   required       |     X*    |               |
+`cmt_calparbgc.tpl`            |   required       |           |               |
+`cmt_calparbgc.pmt`            |                  |     X     |               |
 `json2simpletxt.r`             |                  |           |       X       |
-`<case-name>-simple-output.csv`       |                  |     X     |               |
+`<case-name>-simpletxt.csv`    |                  |     X     |               |
+`create_instruction-file.r`    |                  |           |       X       |
+`read-simpletxt.ins`           |   required       |     X     |               |
+`<case-name>.pst`              |   required       |     X*    |               |
 `<case-name>.rec`              |                  |     X     |               |
 `<case-name>.jac`              |                  |     X     |               |
 `<case-name>.jst`              |                  |     X     |               |
@@ -58,8 +61,8 @@ File                           | Input Files      | Generated | Helper Scripts|
 > *The pest control file can be generated using the `PESTGEN` utility program or written by hand.
 
 ### Required Input Files
-1. `<case-name>_cmt_calparbgc.tpl` - The pest "template file(s)"; tells pest how to read the parameters from the model's parameter input files and which values to replace (parameterize). There could be more than one template file, if for example you decided to calibrate a value in one of the other `parameters/cmt_xxxx.txt` files.
-2. `<case-name>.ins` - The pest "instruction file(s?)"; tells pest how to read the model's output files and find values that it will check against observations or desired values.
+1. `cmt_calparbgc.tpl` - The pest "template file(s)"; tells pest how to read the parameters from the model's parameter input files and which values to replace (parameterize). There could be more than one template file, if for example you decided to calibrate a value in one of the other `parameters/cmt_xxxx.txt` files.
+2. `read-simpletxt.ins` - The pest "instruction file(s?)"; tells pest how to read the model's output files and find values that it will check against observations or desired values.
 3. `<case-name>.pst` - The pest control file; tells pest how to run the model and contains much information for "tuning" pest's operation.
 4. `parameters/cmt_calparbgc.txt` - The dvmdostem parameter file holding values that should be calibrated. You shouldn't need a duplicate of this file - you will tell pest where to look for the parameter file (which is typically in `dvmdostem`'s `parameters/` directory).
 
@@ -70,11 +73,11 @@ File                           | Input Files      | Generated | Helper Scripts|
 
 ### Helper Scripts
 1. `json2simpletxt.r` - an R script (that we wrote) that helps translate our model outputs (the `.json` files generated when the model is run in calibration mode) into an easier format for creating the pest template file. This script could be written in with Python or bash, or any number of other languages. 
-2. `<case-name>_create_ins.r` - Tells pest how to interpret an output file and how to extract values associated with output variables.
+2. `create-instruction-file.r` - Tells pest how to interpret an output file and how to extract values associated with output variables.
 3. `generate-pest-case.py` (NOT IMPLEMENTED YET) - This utility could generate a folder with a bunch of appropriately named files for a particular pest case.
 
 ### Generated files
-1. `<case-name>-simple-output.csv` - The simplified model outputs containing just the values to be compared against observed values; this file is generated by the `json2simpletxt.r` script after the model runs. 
+1. `<case-name>-simpletxt.csv` - The simplified model outputs containing just the values to be compared against observed values; this file is generated by the `json2simpletxt.r` script after the model runs. 
 2. `<case-name>.rec` - The "run record file".
 3. `<case-name>.jac` - The Jacobian matrix for a possible restart.
 4. `<case-name>.jst` - The same file from the previous optimisation iteration.
@@ -87,6 +90,7 @@ File                           | Input Files      | Generated | Helper Scripts|
 11. `<case-name>.obf` - The observation sensitivities.
 12. `<case-name>.rst` - The restart information stored at the beginning of each optimisation iteration.
 13. `<case-name>.par` - The best parameter values achieved.
+14. `cmt_calparbgc.pmt` - Contains the variable/substitution names from the template file(s). Generated by `TEMPCHEK`.
 
 
 <hr>
@@ -143,22 +147,33 @@ File                           | Input Files      | Generated | Helper Scripts|
          Writing model input file ../dvm-dos-tem/parameters/cmt_calparbgc.txt ----->
          File ../dvm-dos-tem/parameters/cmt_calparbgc.txt written ok.
 
-7. Use the `json2simpletxt.r` script to read the model outputs, (`.json` files generated when running `dvmdostem` in calibration mode), and create a simplified version of the outputs that will be easier to parse in the pest instruction file. Variable names should include pft numbers if pft-specific. One possibility for the simplified output format is like this:
+7. Modify the `json2simpletxt.r` script to select/write the variables you are interested in.
 
+8. Use the `json2simpletxt.r` script to read the model outputs, (`.json` files generated when running `dvmdostem` in calibration mode), and create a simplified version of the outputs that will be easier to parse in the pest instruction file.
+
+        $ ../pestdemo/shrub_vegonly/json2simpletxt.r
+        [1] "Found this many json files:"
+        [1] 100
+        [1] "Writing file:"
+        [1] "/Users/tobeycarman/Documents/SEL/dvm-dos-tem/shrub_vegonly-simpletxt.csv"
+
+  Variable names should include pft numbers if pft-specific. One possibility for the simplified output format is like this:
+
+        $ less shrub_vegonly-simpletxt.csv
         Variable,Value
         GPPAll0,110.7451347285
         NPPAll0,55.3725673643
         ...
 
-  > Note, this step is not strictly necessary, but because of the rather  primitive and tedious methods available in the pest instruction file (navigating by line and characther position), it will probbaly be easier and more reliable to parse a simplifed text file rather than the `.json` files.
+  > Note, this step is not strictly necessary, but because of the rather  primitive and tedious methods available in the pest instruction file (navigating by line and charachter position), it will probbaly be easier and more reliable to parse a simplifed text file rather than the `.json` files.
 
-7. Write the instruction file(s) (`.ins`). This can be written by hand or generated using our helper script `<case-name>-create-pest-ins.r`, or another helper script that you may write. Make sure that the instruction file matches the output file.
+7. Write the instruction file(s) (`.ins`). This can be written by hand or generated using our helper script `create-instruction-file.r`, or another helper script that you may write. Make sure that the instruction file matches the output file.
 8. Check the instruction file with `PESTCHEK` and `INSCHEK`.
 
 8. Use `PESTGEN` to create a start at a control file (`.pst`).
 
-        $ inschek <case-name>.ins
-        $ inschek <case-name>.ins <model output>.csv
+        $ inschek read-simpletxt.ins
+        $ inschek read-simpletxt.ins <case-name>-simpletxt.csv
 
 
 <hr><hr>
