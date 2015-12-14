@@ -1,6 +1,6 @@
 ptf %
 //===========================================================
-CMT00 // SHOULD THIS BE BARE GROUND/OPEN WATER/SNOW AND ICE??? ##THESE ARE JUNK VALUES### - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
+// CMT00 // SHOULD THIS BE BARE GROUND/OPEN WATER/SNOW AND ICE??? ##THESE ARE JUNK VALUES### - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
 //PFT0      PFT1        PFT2         PFT3         PFT4         PFT5         PFT6         PFT7         PFT8         PFT9         // names: comments                  
 939.0       1255.0        50.0         83.0         50.0         27.0         28.0         26.0         25.0         0.0          // cmax:
 3.1          2.5          2.5          0.80         1.4          1.5          2.2          1.1          2.1          0.0          // nmax:
@@ -23,7 +23,7 @@ CMT00 // SHOULD THIS BE BARE GROUND/OPEN WATER/SNOW AND ICE??? ##THESE ARE JUNK 
 0.0020805       // kdcsompr:
 0.0000108       // kdcsomcr:
 //===========================================================
-CMT01 // Black Spruce Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
+// CMT01 // Black Spruce Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
 //PFT0      PFT1        PFT2         PFT3         PFT4         PFT5         PFT6         PFT7         PFT8         PFT9         // names: comments                  
 2200         2200.0       1250.0         83.0         50.0         27.0         28.0         260.0         250.0         0.0          // cmax:
 3.3          3.3          2.5          0.80         1.4          1.5          2.2          1.1          2.1          0.0          // nmax:
@@ -46,7 +46,7 @@ CMT01 // Black Spruce Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 
 0.0020805       // kdcsompr:
 0.0000108       // kdcsomcr:
 //===========================================================
-CMT02 // White Spruce Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
+// CMT02 // White Spruce Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
 //PFT0       PFT1        PFT2         PFT3         PFT4         PFT5         PFT6         PFT7         PFT8         PFT9         // names: comments                  
 939.0        255.0        50.0         83.0         50.0         27.0         28.0         26.0         25.0         0.0          // cmax:
 3.1          2.5          2.5          0.80         1.4          1.5          2.2          1.1          2.1          0.0          // nmax:
@@ -69,7 +69,7 @@ CMT02 // White Spruce Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 
 0.0020805       // kdcsompr:
 0.0000108       // kdcsomcr:
 //===========================================================
-CMT03 // Boreal Deciduous Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
+// CMT03 // Boreal Deciduous Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
 //PFT0       PFT1        PFT2         PFT3         PFT4         PFT5         PFT6         PFT7         PFT8         PFT9         // names: comments                  
 939.0        255.0        50.0         83.0         50.0         27.0         28.0         26.0         25.0         0.0          // cmax:
 3.1          2.5          2.5          0.80         1.4          1.5          2.2          1.1          2.1          0.0          // nmax:
@@ -92,7 +92,7 @@ CMT03 // Boreal Deciduous Forest ###THESE ARE JUNK VALUES!!!###- (max. 10 PFTs o
 0.0020805       // kdcsompr:
 0.0000108       // kdcsomcr:
 //===========================================================
-CMT04 // Shrub Tundra - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
+// CMT04 // Shrub Tundra - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
 //Salix      Betula       Decid.       E.green      Sedges       Forbs        Grasses      Lichens      Feather      Misc1.       // names: comments                  
 %cmax0%	%cmax1%	%cmax2%	%cmax3%	%cmax4%	%cmax5%	%cmax6%	%cmax7%	%cmax8%	0	//	cmax:										
 %nmax0%	%nmax1%	%nmax2%	%nmax3%	%nmax4%	%nmax5%	%nmax6%	%nmax7%	%nmax8%	0	//	nmax:										
@@ -115,7 +115,7 @@ CMT04 // Shrub Tundra - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated
 %kdcsompr%	//	kdcsompr:								
 %kdcsomcr%	//	kdcsomcr:													
 //===========================================================
-CMT05 // gsfen - (max. 10 PFTs) Plant calibrated parameters
+// CMT05 // gsfen - (max. 10 PFTs) Plant calibrated parameters
 //Decid.     Sedges       Grasses      Forbs        Lichens      Feather      Sphag.       PFT7       PFT8         PFT9         // names: comments                  
 66.40        108.6        20.8         35.4         42.1         29.47        26.3         0.0        0.0          0.0          // cmax:
 0.550        4.01         0.29         0.97         0.12         0.41         0.32         0.0        0.0          0.0          // nmax:
@@ -138,7 +138,7 @@ CMT05 // gsfen - (max. 10 PFTs) Plant calibrated parameters
 0.0020805       // kdcsompr:
 0.0000108       // kdcsomcr:
 //===========================================================
-CMT06 // Wet Sedge Tundra - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
+// CMT06 // Wet Sedge Tundra - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
 //Decid.     Sedges       Grasses      Forbs        Lichens      Feather      Sphag.       PFT7       PFT8         PFT9         // names: comments                  
 66.40        108.6        20.8         35.4         42.1         29.47        26.3         0.0        0.0          0.0          // cmax:
 0.550        4.01         0.29         0.97         0.12         0.41         0.32         0.0        0.0          0.0          // nmax:
@@ -161,7 +161,7 @@ CMT06 // Wet Sedge Tundra - (max. 10 PFTs over 1 soil column) (BGC) plant calibr
 0.0020805       // kdcsompr:
 0.0000108       // kdcsomcr:
 //===========================================================
-CMT07 // Grass Sedge Fen Yuk Flats calibrated parameters										
+// CMT07 // Grass Sedge Fen Yuk Flats calibrated parameters										
 //Sedges Forbs	     Lichens	  Feather	pft4	pft5	pft6	pft7	pft8	pft9	   // names: comments
 650	65	1000	300	0.00	0.00	0.00	0.00	0.00	0.00	   // cmax:
 10	3	0.12	0.41	0.00	0.00	0.00	0.00	0.00	0.00	   // nmax:

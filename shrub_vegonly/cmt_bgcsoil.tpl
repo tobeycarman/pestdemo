@@ -1,6 +1,6 @@
 ptf #
 //===========================================================
-CMT00 // Default TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
+// CMT00 // Default TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
 2.0               // rhq10:
 0.0               // moistmin:
 0.5               // moistopt:
@@ -21,7 +21,7 @@ CMT00 // Default TEM Community  - soil microbial activity (BGC) parameters and d
 363               // initsoln:
 0.76              // initavln:
 //===========================================================
-CMT01 // CMT1 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
+// CMT01 // CMT1 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
 2.0               // rhq10:
 0.0               // moistmin:
 0.5               // moistopt:
@@ -42,7 +42,7 @@ CMT01 // CMT1 TEM Community  - soil microbial activity (BGC) parameters and defa
 363               // initsoln:
 0.76              // initavln:
 //===========================================================
-CMT02 // CMT2 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
+// CMT02 // CMT2 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
 2.0               // rhq10:
 0.0               // moistmin:
 0.5               // moistopt:
@@ -63,7 +63,7 @@ CMT02 // CMT2 TEM Community  - soil microbial activity (BGC) parameters and defa
 363               // initsoln:
 0.76              // initavln:
 //===========================================================
-CMT03 // CMT3 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
+// CMT03 // CMT3 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
 2.0               // rhq10:
 0.0               // moistmin:
 0.5               // moistopt:
@@ -84,7 +84,7 @@ CMT03 // CMT3 TEM Community  - soil microbial activity (BGC) parameters and defa
 363               // initsoln:
 0.76              // initavln:
 //===========================================================
-CMT04 // Shrub Tundra  - soil microbial activity (BGC) parameters and default initial conditions
+// CMT04 // Shrub Tundra  - soil microbial activity (BGC) parameters and default initial conditions
 2.0               // rhq10:
 0.0               // moistmin:
 0.5               // moistopt:
@@ -105,7 +105,7 @@ CMT04 // Shrub Tundra  - soil microbial activity (BGC) parameters and default in
 #isoln    #       // initsoln:
 #iavln    #       // initavln:
 //===========================================================
-CMT05 // Tussock Tundra  - soil microbial activity (BGC) parameters and default initial conditions
+// CMT05 // Tussock Tundra  - soil microbial activity (BGC) parameters and default initial conditions
 2.0               // rhq10:
 0.0               // moistmin:
 0.5               // moistopt:
@@ -126,7 +126,7 @@ CMT05 // Tussock Tundra  - soil microbial activity (BGC) parameters and default 
 3630               // initsoln:
 0.76              // initavln:
 //===========================================================
-CMT06 // CMT6 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
+// CMT06 // CMT6 TEM Community  - soil microbial activity (BGC) parameters and default initial conditions
 2.0               // rhq10:
 0.0               // moistmin:
 0.5               // moistopt:
@@ -147,7 +147,7 @@ CMT06 // CMT6 TEM Community  - soil microbial activity (BGC) parameters and defa
 3630               // initsoln:
 0.76              // initavln:
 //=====================================================================
-CMT07 // CMT7 TEM Community GS Fen YukFlats - soil microbial activity (BGC) parameters and default initial 
+// CMT07 // CMT7 TEM Community GS Fen YukFlats - soil microbial activity (BGC) parameters and default initial 
 2	          // rhq10:
 0	          // moistmin:
 0.5	          // moistopt:
