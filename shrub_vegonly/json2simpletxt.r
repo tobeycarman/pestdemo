@@ -1,19 +1,34 @@
-#pest processing script to translate json dvmdostem output into a csv (text) file that can be read by pest.
+#!/usr/bin/env Rscript
 
-#currently set up for pft-specific pools only, for a boreal shrub community with 9 pfts.
-#to add soil pools, would need to add code for extracting appropriate variables from the json object then adding appropriate variable names 
-#and values to the obs.vals data.frame produced at the end.
+# Script to translate json dvmdostem output into a 
+# csv (text) file that can be read by PEST.
 
-#results are written out into a .txt file comma delimited.
-#output can be found in the outdir
-outdir<-'~/Desktop/pest/shrub_vegonly'
-setwd('/tmp/year-cal-dvmdostem/')
+# Currently set up for pft-specific pools only, for a boreal 
+# shrub community with 9 pfts. To add soil pools, would need to 
+# add code for extracting appropriate variables from the json 
+# object then adding appropriate variable names 
+# and values to the obs.vals data.frame produced at the end.
+
+# Results are written out into a .txt file comma delimited.
+# output can be found in the outdir
+
+# SET THE CASE NAME HERE:
+casename<-"shrub_vegonly"
+
+# store the current working directory so we can write the output file here
+script_run_from_directory<-getwd()
+ofname<-file.path(script_run_from_directory, paste(casename, "-simple-output.csv", sep=""))
+
+# do the parsing in the the /tmp directory...
+setwd('/tmp/dvmdostem/calibration/yearly')
 library(rjson)
 
-#haven't implemented this yet- want to take the averages of last 10 years model output for comparison.
+# haven't implemented this yet- want to take the averages of last 10 years model output for comparison.
 avg.years=10
 jsons=dir(pattern='json')
 num.files=length(jsons)
+print("Found this many json files:")
+print(num.files)
 last.jsons=jsons[(num.files-avg.years):num.files]
 ######################################################
 
@@ -72,8 +87,9 @@ vals<-c(pft.vals.vec)
 
 obs.vals<-data.frame(Variable=vars.numd,Value=vals)
 
-setwd(outdir)
-write.table(obs.vals,'TEM_Pest_Output_shrub_vegonly.txt',row.names=FALSE,quote=FALSE,sep=',')
+print("Writing file:")
+print(ofname)
+write.table(obs.vals,ofname,row.names=FALSE,quote=FALSE,sep=',')
 
 
 
