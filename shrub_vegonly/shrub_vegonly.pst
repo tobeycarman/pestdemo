@@ -339,9 +339,9 @@ vegnr8                  0.00000      1.0  obsgroup
 vegnsum8                2.47816      1.0  obsgroup
 veglbln8                1.23908      1.0  obsgroup
 * model command line
-/home/vijay/Desktop/pest/shrub_vegonly/pest_batch_shrub_vegonly
+pest_batch_shrub_vegonly
 * model input/output
-/home/vijay/Desktop/pest/shrub_vegonly/calpar_shrub_vegonly.tpl /home/vijay/jul2015check/dvm-dos-tem/config/cmt_calparbgc.txt
-/home/vijay/Desktop/pest/shrub_vegonly/bgcsoil.tpl /home/vijay/jul2015check/dvm-dos-tem/config/cmt_bgcsoil.txt
-/home/vijay/Desktop/pest/shrub_vegonly/tem_shrub_vegonly.ins  /home/vijay/Desktop/pest/shrub_vegonly/TEM_Pest_Output_shrub_vegonly.txt
+cmt_calparbgc.tpl ../../dvm-dos-tem/config/cmt_calparbgc.txt
+cmt_bgcsoil.tpl ../../dvm-dos-tem/config/cmt_bgcsoil.txt
+read-simpletxt.ins  shrub_vegonly-simpletxt.csv
 * prior information
