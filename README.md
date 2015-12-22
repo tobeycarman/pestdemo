@@ -3,9 +3,13 @@
 * Original Author: Vijay Patil, Oct 11 2015
 * Modified/Expanded: Tobey Carman, Dec 10 2015
 
+## General Idea
+
+<img src="https://docs.google.com/drawings/d/1LM48CXqLutErYPl2DqqH-e82QBFT0R6leX6oLdmGYOM/pub?w=770&amp;h=851">
+
 ## Background
 
-This presumes that you have downloaded pest from www.pesthomepage.org, installed and compiled the program, and worked through some of the documents in the `pestdocs/` folder:
+This presumes that you have downloaded PEST from www.pesthomepage.org, installed and compiled the program, and worked through some of the documents in the `pestdocs/` folder:
 
 1. `unixpest.pdf` - instructions for compiling under linux.
 2. `pestman` - comprehensive manual by the creators of the software.
