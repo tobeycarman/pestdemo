@@ -11,7 +11,7 @@ cd /Users/tobeycarman/Documents/SEL/dvm-dos-tem/
 # Create the simplified output 
 cd /Users/tobeycarman/Documents/SEL/pestdemo/basic-pest
 rm basicpestsimpleoutput.csv
-./json2simpletxt.r
+./json2simpletxt.py
 #cp basic-pest-simple-output.csv AAA-basic-pest-simple-output.csv
 
 
