@@ -2,35 +2,62 @@
 
 import json
 import glob
+import textwrap
+import argparse
 
-casename = "shrub_vegonly"
 
-files = sorted( glob.glob('%s/*.json' % "/tmp/dvmdostem/calibration/yearly/") )
+def main(args):
 
-with open(files[-1]) as f:
-  fdata = json.load(f)
+  files = sorted( glob.glob('%s/*.json' % "/tmp/dvmdostem/calibration/yearly/") )
 
-# PFT variables
-pftvars = ['GPPAll','NPPAll','VEGCL','VEGCW','VEGCR','VEGCSUM','VEGNL','VEGNW','VEGNR','VEGNSUM','VEGLBLN']
-pftvarskeys = ['GPPAll', 'NPPAll', 'VEGCarbon']
+  # Open the last file.
+  # NOTE: May want to take average of last X files (years)??
+  with open(files[-1]) as f:
+    fdata = json.load(f)
 
-ofname = '%s-simplified-output.txt' % (casename )
-with open(ofname, 'w') as f:
-  f.write("Variable,Value\n")
-  for i in range(0, 9):
-    pftkey = 'PFT%i' % (i)
-    f.write('GPPAll%s,%s\n' % (i, fdata[pftkey]['GPPAll']))
-    f.write('NPPAll%s,%s\n' % (i, fdata[pftkey]['NPPAll']))
-    f.write('VEGCL%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf']))
-    f.write('VEGCW%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Stem']))
-    f.write('VEGCR%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Root']))
-    f.write('VEGCSUM%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf'] + fdata[pftkey]['VegCarbon']['Stem'] + fdata[pftkey]['VegCarbon']['Root']))
-    f.write('VEGNL%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Leaf']))
-    f.write('VEGNW%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Stem']))
-    f.write('VEGNR%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Root']))
-    f.write('VEGNSUM%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf'] + fdata[pftkey]['VegCarbon']['Stem'] + fdata[pftkey]['VegCarbon']['Root']))
-    f.write('VEGLBLN%s,%s\n' % (i, fdata[pftkey]['VegLabileNitrogen']))
-    
+  # PFT variables
+  #pftvars = ['GPPAll','NPPAll','VEGCL','VEGCW','VEGCR','VEGCSUM','VEGNL','VEGNW','VEGNR','VEGNSUM','VEGLBLN']
+  #pftvarskeys = ['GPPAll', 'NPPAll', 'VEGCarbon']
+
+  #ofname = '%s-simplified-output.txt' % (casename )
+  with open(args.file, 'w') as f:
+    f.write("Variable,Value\n")
+    for i in range(0, 9):
+      pftkey = 'PFT%i' % (i)
+      f.write('GPPAll%s,%s\n' % (i, fdata[pftkey]['GPPAll']))
+      f.write('NPPAll%s,%s\n' % (i, fdata[pftkey]['NPPAll']))
+      f.write('VEGCL%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf']))
+      f.write('VEGCW%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Stem']))
+      f.write('VEGCR%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Root']))
+      f.write('VEGCSUM%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf'] + fdata[pftkey]['VegCarbon']['Stem'] + fdata[pftkey]['VegCarbon']['Root']))
+      f.write('VEGNL%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Leaf']))
+      f.write('VEGNW%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Stem']))
+      f.write('VEGNR%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Root']))
+      f.write('VEGNSUM%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf'] + fdata[pftkey]['VegCarbon']['Stem'] + fdata[pftkey]['VegCarbon']['Root']))
+      f.write('VEGLBLN%s,%s\n' % (i, fdata[pftkey]['VegLabileNitrogen']))
+
+
+if __name__ == '__main__':
+  
+  parser = argparse.ArgumentParser(
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    description=textwrap.dedent('''
+      Generates a simplified version of the model's json files. This
+      is helpful for parsing with the PEST instruction files, as the
+      PEST instruction files basically involve navigating by line and 
+      charachter position.
+    ''')
+  )
+
+  parser.add_argument('file', 
+    help=textwrap.dedent('''The path/name of a file to generate.'''))
+
+  args = parser.parse_args()
+  #print args
+
+  main(args)
+
+
 
 '''
 GPPAll0,110.7451347285

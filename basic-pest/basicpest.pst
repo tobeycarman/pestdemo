@@ -134,5 +134,5 @@ veglbln8               -77777.0      1.0  obsgroup
 ./dvmdostem-pest-wrapper.sh
 * model input/output
 cmt_calparbgc.tpl  ../../dvm-dos-tem/parameters/cmt_calparbgc.txt
-read-simpletxt.ins basicpestsimpleoutput.csv
+read-simpletxt.ins simplified-output.csv
 * prior information
