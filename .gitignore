@@ -1,0 +1,20 @@
+# .gitignore for PEST runs - ignoring generated files...
+
+# MacOSX generated file
+.DS_Store
+
+**/*.runs
+**/*.cnd
+**/*.drf
+**/*.jac
+**/*.jco
+**/*.jst
+**/*.mtt
+**/*.rec
+**/*.rei
+**/*.res
+**/*.rst
+**/*.seo
+**/*.sen
+**/*.svd
+
