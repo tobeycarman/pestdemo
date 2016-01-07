@@ -12,6 +12,12 @@
 # Results are written out into a .txt file comma delimited.
 # output can be found in the outdir
 
+print("***************************************************")
+print("THIS PYTHON VERSION OF THIS SCRIPT IS MORE CURRENT!")
+print(" --> USE THIS VERSION WITH CAUTION!")
+print("***************************************************")
+
+
 # SET THE CASE NAME HERE:
 casename<-"shrub_vegonly"
 
