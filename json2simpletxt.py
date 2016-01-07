@@ -8,18 +8,14 @@ import argparse
 
 def main(args):
 
-  files = sorted( glob.glob('%s/*.json' % "/tmp/dvmdostem/calibration/yearly/") )
+  files = sorted( glob.glob('%s/*.json' % '/tmp/dvmdostem/calibration/yearly/') )
+  print "Found %s files." % (len(files)) 
 
   # Open the last file.
   # NOTE: May want to take average of last X files (years)??
   with open(files[-1]) as f:
     fdata = json.load(f)
-
-  # PFT variables
-  #pftvars = ['GPPAll','NPPAll','VEGCL','VEGCW','VEGCR','VEGCSUM','VEGNL','VEGNW','VEGNR','VEGNSUM','VEGLBLN']
-  #pftvarskeys = ['GPPAll', 'NPPAll', 'VEGCarbon']
-
-  #ofname = '%s-simplified-output.txt' % (casename )
+  print "Writing simplified outputs to: %s" % (args.file) 
   with open(args.file, 'w') as f:
     f.write("Variable,Value\n")
     for i in range(0, 9):
@@ -36,9 +32,46 @@ def main(args):
       f.write('VEGNSUM%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf'] + fdata[pftkey]['VegCarbon']['Stem'] + fdata[pftkey]['VegCarbon']['Root']))
       f.write('VEGLBLN%s,%s\n' % (i, fdata[pftkey]['VegLabileNitrogen']))
 
+  if (args.instructionfile is not None):
+    print "Writing instruction file to: %s" % (args.instructionfile)
+    print "DOUBLE CHECK! --> instruction file must match simplified outputs!"
+    with open(args.instructionfile, 'w') as f:
+      f.write("pif @\n")
+      for i in range(0,9):
+        f.write("l1 @,@ !GPPALL%s!\n" % (i))
+        f.write("l1 @,@ !NPPALL%s!\n" % (i))
+        f.write("l1 @,@ !VEGCL%s!\n" % (i))
+        f.write("l1 @,@ !VEGCW%s!\n" % (i))
+        f.write("l1 @,@ !VEGCR%s!\n" % (i))
+        f.write("l1 @,@ !VEGCSUM%s!\n" % (i))
+        f.write("l1 @,@ !VEGNL%s!\n" % (i))
+        f.write("l1 @,@ !VEGNW%s!\n" % (i))
+        f.write("l1 @,@ !VEGNR%s!\n" % (i))
+        f.write("l1 @,@ !VEGNSUM%s!\n" % (i))
+        f.write("l1 @,@ !VEGLBLN%s!\n" % (i))
+
+    # This seems a bit of a hack, but we need to 
+    # replace the seconds line of the file with a l2 instead of l1
+    # for the pest "line advance" function.
+    # So we open the file, read it, modify the data, and write it back
+    with open(args.instructionfile, 'r') as f:
+      data = f.readlines()
+
+    data[1] = "l2 @,@ !GPPALL0!\n"
+
+    with open(args.instructionfile, 'w') as f:
+      f.writelines(data)
+
+    # Example:
+    '''
+    pif @
+    l2 @,@ !GPPALL0!
+    l1 @,@ !NPPALL0!
+    ....
+    '''
 
 if __name__ == '__main__':
-  
+
   parser = argparse.ArgumentParser(
     formatter_class=argparse.RawDescriptionHelpFormatter,
     description=textwrap.dedent('''
@@ -50,15 +83,18 @@ if __name__ == '__main__':
   )
 
   parser.add_argument('file', 
-    help=textwrap.dedent('''The path/name of a file to generate.'''))
+     help=textwrap.dedent('''The path/name of a simpliflied output file to generate.'''))
 
+  parser.add_argument('instructionfile', nargs="?",
+     help=textwrap.dedent("The path/name of a corresponding instruction file."))
+ 
   args = parser.parse_args()
-  #print args
+  print args
 
   main(args)
 
 
-
+# resulting simplified outputs for reference 
 '''
 GPPAll0,110.7451347285
 NPPAll0,55.3725673643
@@ -74,9 +110,8 @@ VEGLBLN0,0.9190853995
 '''
 
 
-
+# Json snippet for reference
 '''
-
 {u'GPPAll': 28.1762950271368,
  u'GPPAllIgnoringNitrogen': 28.1762950271368,
  u'InNitrogenUptake': -933324.09375,
@@ -101,9 +136,3 @@ VEGLBLN0,0.9190853995
   u'Stem': -22399848.0}
   }
 '''
-# for i in range(0,9):
-#   pftkey = 'PFT%s' % (i)
-#   for var in pftvars:
-#     print fdata[pftkey][var]
-
-#from IPython import embed; embed()
