@@ -1,0 +1,138 @@
+pcf
+* control data
+restart  estimation
+    9    99     9     0     1
+    1     1 double point   1   0   0
+  5.0   2.0   0.3  0.03    10
+  3.0   3.0 0.001  0
+  0.1
+   30  0.01     3     3  0.01     3
+    1     1     1
+* parameter groups
+cmax0        relative 0.01  0.0  switch  2.0 parabolic
+cmax1        relative 0.01  0.0  switch  2.0 parabolic
+cmax2        relative 0.01  0.0  switch  2.0 parabolic
+cmax3        relative 0.01  0.0  switch  2.0 parabolic
+cmax4        relative 0.01  0.0  switch  2.0 parabolic
+cmax5        relative 0.01  0.0  switch  2.0 parabolic
+cmax6        relative 0.01  0.0  switch  2.0 parabolic
+cmax7        relative 0.01  0.0  switch  2.0 parabolic
+cmax8        relative 0.01  0.0  switch  2.0 parabolic
+* parameter data
+cmax0        none relative    255.000      -1.000000E+10   1.000000E+10 cmax0           1.0000        0.0000      1
+cmax1        none relative    625.000      -1.000000E+10   1.000000E+10 cmax1           1.0000        0.0000      1
+cmax2        none relative    83.0000      -1.000000E+10   1.000000E+10 cmax2           1.0000        0.0000      1
+cmax3        none relative    23.9000      -1.000000E+10   1.000000E+10 cmax3           1.0000        0.0000      1
+cmax4        none relative    45.0000      -1.000000E+10   1.000000E+10 cmax4           1.0000        0.0000      1
+cmax5        none relative    66.8000      -1.000000E+10   1.000000E+10 cmax5           1.0000        0.0000      1
+cmax6        none relative    27.8000      -1.000000E+10   1.000000E+10 cmax6           1.0000        0.0000      1
+cmax7        none relative    38.8000      -1.000000E+10   1.000000E+10 cmax7           1.0000        0.0000      1
+cmax8        none relative    86.1000      -1.000000E+10   1.000000E+10 cmax8           1.0000        0.0000      1
+* observation groups
+obsgroup
+* observation data
+gppall0                 31.7222      1.0  obsgroup
+nppall0                 21.5175      1.0  obsgroup
+vegcl0                  11.0686      1.0  obsgroup
+vegcw0                  7.01341      1.0  obsgroup
+vegcr0                  5.25434      1.0  obsgroup
+vegcsum0                23.3364      1.0  obsgroup
+vegnl0                -1.866650E+07  1.0  obsgroup
+vegnw0                -1.866650E+07  1.0  obsgroup
+vegnr0                -1.866650E+07  1.0  obsgroup
+vegnsum0                23.3364      1.0  obsgroup
+veglbln0               1.000000E-03  1.0  obsgroup
+gppall1                 33.8094      1.0  obsgroup
+nppall1                 2.06323      1.0  obsgroup
+vegcl1                  1.07792      1.0  obsgroup
+vegcw1                  100.659      1.0  obsgroup
+vegcr1                 0.670447      1.0  obsgroup
+vegcsum1                102.407      1.0  obsgroup
+vegnl1                -1.866650E+07  1.0  obsgroup
+vegnw1                -1.866650E+07  1.0  obsgroup
+vegnr1                -1.866650E+07  1.0  obsgroup
+vegnsum1                102.407      1.0  obsgroup
+veglbln1               1.000000E-03  1.0  obsgroup
+gppall2                 6.28829      1.0  obsgroup
+nppall2                0.140422      1.0  obsgroup
+vegcl2                 7.271104E-02  1.0  obsgroup
+vegcw2                  20.6445      1.0  obsgroup
+vegcr2                 2.059164E-02  1.0  obsgroup
+vegcsum2                20.7378      1.0  obsgroup
+vegnl2                -1.866650E+07  1.0  obsgroup
+vegnw2                -1.866650E+07  1.0  obsgroup
+vegnr2                -1.866650E+07  1.0  obsgroup
+vegnsum2                20.7378      1.0  obsgroup
+veglbln2               1.000000E-03  1.0  obsgroup
+gppall3                 17.9357      1.0  obsgroup
+nppall3                 12.7853      1.0  obsgroup
+vegcl3                  6.41659      1.0  obsgroup
+vegcw3                  0.00000      1.0  obsgroup
+vegcr3                  6.10980      1.0  obsgroup
+vegcsum3                12.5264      1.0  obsgroup
+vegnl3                -1.866650E+07  1.0  obsgroup
+vegnw3                -1.866651E+07  1.0  obsgroup
+vegnr3                -1.866650E+07  1.0  obsgroup
+vegnsum3                12.5264      1.0  obsgroup
+veglbln3               1.000000E-03  1.0  obsgroup
+gppall4                 12.8342      1.0  obsgroup
+nppall4                0.958409      1.0  obsgroup
+vegcl4                  8.40562      1.0  obsgroup
+vegcw4                  0.00000      1.0  obsgroup
+vegcr4                  28.4364      1.0  obsgroup
+vegcsum4                36.8420      1.0  obsgroup
+vegnl4                -1.866651E+07  1.0  obsgroup
+vegnw4                -1.866651E+07  1.0  obsgroup
+vegnr4                -1.866651E+07  1.0  obsgroup
+vegnsum4                36.8420      1.0  obsgroup
+veglbln4               1.000000E-03  1.0  obsgroup
+gppall5                 8.48805      1.0  obsgroup
+nppall5                 2.76782      1.0  obsgroup
+vegcl5                  15.5376      1.0  obsgroup
+vegcw5                  0.00000      1.0  obsgroup
+vegcr5                  0.00000      1.0  obsgroup
+vegcsum5                15.5376      1.0  obsgroup
+vegnl5                -1.866650E+07  1.0  obsgroup
+vegnw5                -1.866651E+07  1.0  obsgroup
+vegnr5                -1.866651E+07  1.0  obsgroup
+vegnsum5                15.5376      1.0  obsgroup
+veglbln5               1.000000E-03  1.0  obsgroup
+gppall6                 7.58559      1.0  obsgroup
+nppall6                 1.13766      1.0  obsgroup
+vegcl6                  19.2262      1.0  obsgroup
+vegcw6                  0.00000      1.0  obsgroup
+vegcr6                  0.00000      1.0  obsgroup
+vegcsum6                19.2262      1.0  obsgroup
+vegnl6                -1.866650E+07  1.0  obsgroup
+vegnw6                -1.866651E+07  1.0  obsgroup
+vegnr6                -1.866651E+07  1.0  obsgroup
+vegnsum6                19.2262      1.0  obsgroup
+veglbln6               1.000000E-03  1.0  obsgroup
+gppall7                 0.00000      1.0  obsgroup
+nppall7                 0.00000      1.0  obsgroup
+vegcl7                  69.5300      1.0  obsgroup
+vegcw7                  0.00000      1.0  obsgroup
+vegcr7                  0.00000      1.0  obsgroup
+vegcsum7                69.5300      1.0  obsgroup
+vegnl7                -1.866650E+07  1.0  obsgroup
+vegnw7                -1.866651E+07  1.0  obsgroup
+vegnr7                -1.866651E+07  1.0  obsgroup
+vegnsum7                69.5300      1.0  obsgroup
+veglbln7               1.000000E-03  1.0  obsgroup
+gppall8                -77777.0      1.0  obsgroup
+nppall8                -77777.0      1.0  obsgroup
+vegcl8                 -77777.0      1.0  obsgroup
+vegcw8                 -77777.0      1.0  obsgroup
+vegcr8                 -77777.0      1.0  obsgroup
+vegcsum8               -233331.      1.0  obsgroup
+vegnl8                 -77777.0      1.0  obsgroup
+vegnw8                 -77777.0      1.0  obsgroup
+vegnr8                 -77777.0      1.0  obsgroup
+vegnsum8               -233331.      1.0  obsgroup
+veglbln8               -77777.0      1.0  obsgroup
+* model command line
+./dvmdostem-pest-wrapper.sh
+* model input/output
+cmt_calparbgc.tpl ../../dvm-dos-tem/parameters/cmt_calparbgc.txt
+read-simple-outputs.ins simplified-outputs.txt 
+* prior information
