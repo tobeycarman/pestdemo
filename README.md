@@ -46,7 +46,7 @@ For the examples below, it is assumed that you have cloned this `pestdemo` repos
             ├── README.md
             └── shrub_vegonly
 
-> WARNING: PEST itself (and possibly the helper scripts) will overwrite some of the parameter files in the dvm-dos-tem! You should make sure that you have stashed or committed your changes before playing around with PEST so that you don't lose any modifications!
+#### WARNING: PEST itself (and possibly the helper scripts) will overwrite some of the parameter files in the dvm-dos-tem! You should make sure that you have stashed or committed your changes before playing around with PEST so that you don't lose any modifications!
 
 1. Choose a 'case-name', such as "shrub_vegonly" and make a folder to hold the PEST files for this PEST run case.
 
@@ -197,44 +197,64 @@ For the examples below, it is assumed that you have cloned this `pestdemo` repos
 
         $ mv basic-pest.pst basic-pest/
 
-10. Finally, modify the `.pst` control file so that it has the correct paths for running the wrapper script and finding the template, parameter, instruction, and observations files. The lines you will need to modify are toward the end of the file in the `* model command line` and `* mode input/output` sections.
+10. Modify the `.pst` control file so that it has the correct paths for running the wrapper script and finding the template, parameter, instruction, and observations files. The lines you will need to modify are toward the end of the file in the "`* model command line`" and "`* mode input/output`" sections.
 
- For this example the end of the `basic-pest.pst`
+11. Make sure that the "post warm up pause" is disabled in the `dvm-dos-tem`. This is required for PEST to be able to automatically start consecutive model runs without user intervention. To do this, set the "pwup" variable to "false" in the `dvm-dos-tem/config/calibration-directives.txt` file.
 
+11. Finally, run PEST!
 
+        $ cd basic-pest
+        $ pest basic-pest.pst
 
-
-
-
-
-
-
+ You should see the model begin to run:
 
 
+        $ pest basic-pest.pst
+         PEST Version 13.4. Watermark Numerical Computing.
+
+         PEST is running in parameter estimation mode.
+
+         PEST run record: case basic-pest
+         (See file basic-pest.rec for full details.)
+
+         Model command line: 
+         ./dvmdostem-pest-wrapper.sh
+
+         Running model .....
+
+            Running model 1 time....
+        Setting up logging...
+        (000000xc76) [note] [] Checking command line arguments...
+        (000000xc76) [warn] [] Argument validation/verification NOT IMPLEMENTED YET!
+        (000000xc76) [note] [] Turn floating point exceptions on?: false
+        (000000xc76) [note] [] Reading controlfile into main(..) scope...
+        (000000xc76) [note] [] Creating a ModelData object based on settings in the control file
+        (000000xc76) [note] [] Creating a fresh 'n clean NEW output file...
+        (000000xc76) [note] [] Start dvmdostem @ Fri Jan  8 16:47:56 2016
+
+        (000000xc76) [note] [] --> CLIMATE --> empty ctor
+        ...
+
+ To stop or pause the model, you will have to open a separate terminal window, change into the `pestdemo/basic-pest` directory and use the various PEST commands: PPAUSE, PUNPAUSE, PSTOP or PSTOPST.
+
+When the PEST run completes, there will be a bunch of files with various info that will help to interpert and 
+
+That is all for now! The shrub_vegonly example is similar to the basic-pest example, but has siginificantly more parameters and may be a bit trickier to get running.
+
+## Ideas for Expansion / To-Do lists
+
+* expand the json2simpletxt.py file so that is can handle soil variables
+* generalize the wrapper script?
+* Work on optimization notes from Vijay (below)
+* finish up the table of files
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        $ inschek read-simpletxt.ins
-        $ inschek read-simpletxt.ins <case-name>-simpletxt.csv
-
-
-<hr><hr>
-
-
+<hr>
+<hr>
+<hr>
+<hr>
+### OLD STUFF; will clean up
 
 2. make sure that pest_ins_create_xx.r creates instruction file that matches output variable names as shown in the output.txt file
 
