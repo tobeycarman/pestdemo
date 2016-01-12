@@ -18,7 +18,7 @@ This presumes that you have downloaded PEST from www.pesthomepage.org, installed
 
 Included are several sets of files for some example pest runs that are trying to calibrate various thing. The `shrub_vegonly` example is attempting to calibrate vegetation-specific parameters for 9 pfts in a boreal deciduous-shrub community. The `basic-pest` example is a much simpler setup that simply tries to calibrate cmax for the PFTs in one of the communities. To createyour own calibration, you will need to carefully follow the pattern here, but creating your own template and instruction files for your specific use case.
 
-> Note: The convention we use for `dvmdostem` is that "input files" are the NetCDF files with driving data while "parameter files" are the text files in the `parameters` directory. This can be confusing when reading the PEST documentation because the PEST authors use "Model Input Files" to refer to what we call "parameter files".
+> Note: In the `dvmdostem` documentation, we distinguish between model input for driving data vs parameters: the driving data is generally held in the `dvm-dos-tem/DATA/` directory and the parameter inputs are held in the `dvm-dos-tem/parameters/` directory. The authors of the PEST documentation use "Model Input Files" to refer to both parameter and driving data (excitation) inputs. In this document, we tend to make the distinction between driving inputs and parameter inputs, and generally modifications to inputs for PEST will be to the parameter inputs instead of the driving inputs.
 
 ## Naming conventions
 
@@ -98,7 +98,7 @@ For the examples below, it is assumed that you have cloned this `pestdemo` repos
 
  Then check that the ../dvm-dos-tem/parameters/cmt_calparbgc.txt file looks ok, and rum the model to make sure it can read the file alright.
 
-6. Figure out which "model outputs" you are interested in calibrating to. In the PEST manual, these outputs are called "observations". In the terminolgy we use with `dvm-dos-tem` we call these "target values". So the model outputs you are interested in are most likely going to come from the calibration `.json` files and will also most likely be values found in the `calibration-targets.py` file.
+6. Figure out which "model outputs" you are interested in calibrating to. In the PEST manual, these outputs are called "observations". In the terminolgy we use with `dvm-dos-tem` we call these "target values". So the model outputs you are interested in are most likely going to come from the calibration `.json` files and will also most likely be values found in the `calibration_targets.py` file.
 
  > Note: It might be the case that we use the same calibration targets for all PEST runs, in which the `json2simpletxt.py` file described in the next steps is already written for you.
 
