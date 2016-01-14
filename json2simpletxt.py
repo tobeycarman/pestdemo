@@ -4,6 +4,8 @@ import json
 import glob
 import textwrap
 import argparse
+import os        # for removing temporarty file
+import shutil    # for making temp copy of calibration targets to be imported
 
 
 def main(args):
@@ -70,6 +72,76 @@ def main(args):
     ....
     '''
 
+
+def targets_to_obs(targetsfile, obsfile, cmtnum):
+  '''Total hack function to place target values in an .obf file from the calibration_targets.py file'''
+
+  print textwrap.dedent('''\
+
+    ### WARNING! ###
+    --> Not sure if the variable/name mappings are correct between the 
+        calibration targets file, the .json files, and the .obf file!!!
+
+    ''')
+
+  # bit of a hack, but allows importing calibration_targets.py as a module
+  shutil.copy(targetsfile, "calibration_targets.py")
+  import calibration_targets
+
+  # find the right cmt data section, based on number
+  for cmtname, data in calibration_targets.calibration_targets.iteritems():
+    if data['cmtnumber'] == int(cmtnum):
+
+      # read the obf file
+      with open(obsfile, 'r') as ofile:
+        obsdata = ofile.readlines()
+
+      # assemble calibraiton targets data
+      new_data = ""
+      for line in obsdata:
+
+        # Note this will have to be made smarter if/when we add non-pft
+        # variables...such as the soil stuff...'cause there won't be a number at the end
+        namepftnum, val = line.split()
+        name = namepftnum[0:-1]
+        pftnum = int(namepftnum[-1:])
+
+        if name == 'gppall':
+          new_tar_val = data['GPPAllIgnoringNitrogen'][pftnum]
+        if name == 'nppall':
+          new_tar_val = data['NPPAll'][pftnum]
+        if name == 'vegcl':
+          new_tar_val = data['VegCarbon']['Leaf'][pftnum]
+        if name == 'vegcw':
+          new_tar_val = data['VegCarbon']['Stem'][pftnum]
+        if name == 'vegcr':
+          new_tar_val = data['VegCarbon']['Root'][pftnum]
+        if name == 'vegcsum':
+          new_tar_val = data['VegCarbon']['Leaf'][pftnum] + data['VegCarbon']['Stem'][pftnum] + data['VegCarbon']['Root'][pftnum]
+        if name == 'vegnl':
+          new_tar_val = data['VegStructuralNitrogen']['Leaf'][pftnum]
+        if name == 'vegnw':
+          new_tar_val = data['VegStructuralNitrogen']['Stem'][pftnum]
+        if name == 'vegnr':
+          new_tar_val = data['VegStructuralNitrogen']['Root'][pftnum]
+        if name == 'vegnsum':
+          new_tar_val = data['VegStructuralNitrogen']['Leaf'][pftnum] + data['VegStructuralNitrogen']['Stem'][pftnum] + data['VegStructuralNitrogen']['Root'][pftnum]
+        if name == 'veglbln':
+          new_tar_val = data['Nuptake'][pftnum]
+
+        newline = "{0}{1} {2:>25}\n".format(name, pftnum, new_tar_val)
+        new_data += newline
+
+      # Write it back out to the .obf file...
+      with open("%s" % obsfile, 'w') as newfile:
+        newfile.write(new_data)
+
+    else:
+      pass
+
+  os.remove("calibration_targets.py")
+
+
 if __name__ == '__main__':
 
   parser = argparse.ArgumentParser(
@@ -83,15 +155,22 @@ if __name__ == '__main__':
   )
 
   parser.add_argument('file', 
-     help=textwrap.dedent('''The path/name of a simpliflied output file to generate.'''))
+      help=textwrap.dedent('''The path/name of a simpliflied output file to generate.'''))
 
   parser.add_argument('instructionfile', nargs="?",
-     help=textwrap.dedent("The path/name of a corresponding instruction file."))
+      help=textwrap.dedent("The path/name of a corresponding instruction file."))
  
-  args = parser.parse_args()
-  print args
+  parser.add_argument('--targets-to-obs', nargs=3, metavar=('targetfile', 'obffile', 'cmtnumber'), 
+      help=textwrap.dedent('''Update a .obf file with values from a calibration_targets file for a given CMT number.'''))
 
-  main(args)
+  args = parser.parse_args()
+  #print args
+
+  if len(args.targets_to_obs) == 3:
+    targets_to_obs(args.targets_to_obs[0], args.targets_to_obs[1], args.targets_to_obs[2])
+
+  else:
+    main(args)
 
 
 # resulting simplified outputs for reference 
