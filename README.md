@@ -127,6 +127,8 @@ For the examples below, it is assumed that you have cloned this `pestdemo` repos
         VEGNW0,-18666504.0
         VEGNR0,-18666504.0
 
+ > ###### Please note: the `json2simpletxt.py` script is fairly crude! Depending on which CMT you are working with, you will need to adjust the indexing in the script so that it only operates over the PFTs that are defined in the community type you are working with!
+
 9. Write the instruction (`.ins`) file(s). The instruction file(s) could be written by hand, but it is probably easier to using the `json2simpletxt.py` helper script (this will re-run the output to simple-output conversion; this is not a problem):
 
         $ ./json2simpletxt.py basic-pest/simplified-outputs.txt basic-pest/read-simple-outputs.ins
