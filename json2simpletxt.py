@@ -31,7 +31,7 @@ def main(args):
       f.write('VEGNL%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Leaf']))
       f.write('VEGNW%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Stem']))
       f.write('VEGNR%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Root']))
-      f.write('VEGNSUM%s,%s\n' % (i, fdata[pftkey]['VegNitrogen']['Leaf'] + fdata[pftkey]['VegNitrogen']['Stem'] + fdata[pftkey]['VegNitrogen']['Root']))
+      f.write('VEGNSUM%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Leaf'] + fdata[pftkey]['VegStructuralNitrogen']['Stem'] + fdata[pftkey]['VegStructuralNitrogen']['Root']))
       f.write('VEGLBLN%s,%s\n' % (i, fdata[pftkey]['VegLabileNitrogen']))
 
   if (args.instructionfile is not None):
@@ -166,7 +166,8 @@ if __name__ == '__main__':
   args = parser.parse_args()
   #print args
 
-  if len(args.targets_to_obs) == 3:
+  if (args.targets_to_obs):
+    #if len(args.targets_to_obs) == 3:
     targets_to_obs(args.targets_to_obs[0], args.targets_to_obs[1], args.targets_to_obs[2])
 
   else:
