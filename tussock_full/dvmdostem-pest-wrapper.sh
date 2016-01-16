@@ -5,5 +5,5 @@ cd ~/dvm-dos-tem
 
 cd ~/pestdemo/tussock_full
 rm -f simplified-outputs.txt
-./pest-helper.py --json2obs simplified-outputs.txt
+./pest-helper.py --json-to-obs simplified-outputs.txt
 
