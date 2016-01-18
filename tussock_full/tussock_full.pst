@@ -8,6 +8,10 @@ restart  estimation
   0.1
    30  0.01     3     3  0.01     3
     1     1     1
+* singular value decomposition
+1
+20 5E-7
+0
 * parameter groups
 cmax0        relative 0.01  0.0  switch  2.0 parabolic
 cmax1        relative 0.01  0.0  switch  2.0 parabolic
