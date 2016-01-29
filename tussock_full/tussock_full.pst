@@ -120,14 +120,14 @@ kdcsoma      relative 0.01  0.0  switch  2.0 parabolic
 kdcsompr     relative 0.01  0.0  switch  2.0 parabolic
 kdcsomcr     relative 0.01  0.0  switch  2.0 parabolic
 * parameter data
-cmax0        none relative    2.50000          1             50                 cmax0           1.0000        0.0000      1
-cmax1        none relative    60.4000          1             150                cmax1           1.0000        0.0000      1
-cmax2        none relative    50.7000          1             150                cmax2           1.0000        0.0000      1
-cmax3        none relative    150.600          1             300                cmax3           1.0000        0.0000      1
-cmax4        none relative    50.4000          1             150                cmax4           1.0000        0.0000      1
-cmax5        none relative    90.1000          1             200                cmax5           1.0000        0.0000      1
-cmax6        none relative    70.7000          1             150                cmax6           1.0000        0.0000      1
-cmax7        none relative    90.3000          1             200                cmax7           1.0000        0.0000      1
+cmax0        none relative    5.0              1             50                 cmax0           1.0000        0.0000      1
+cmax1        none relative    32.5             1             150                cmax1           1.0000        0.0000      1
+cmax2        none relative    61               1             150                cmax2           1.0000        0.0000      1
+cmax3        none relative    165              1             300                cmax3           1.0000        0.0000      1
+cmax4        none relative    55               1             150                cmax4           1.0000        0.0000      1
+cmax5        none relative    89               1             200                cmax5           1.0000        0.0000      1
+cmax6        none relative    32               1             150                cmax6           1.0000        0.0000      1
+cmax7        none relative    84               1             200                cmax7           1.0000        0.0000      1
 nmax0        none relative    0.90000          0.2           3                  nmax0           1.0000        0.0000      1
 nmax1        none relative    3.90000          0.2           12                 nmax1           1.0000        0.0000      1
 nmax2        none relative    2.80000          0.2           6                  nmax2           1.0000        0.0000      1
