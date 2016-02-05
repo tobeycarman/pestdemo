@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ~/dvm-dos-tem
-./dvmdostem --cal-mode -l note -p 10 -m 25
+./dvmdostem --cal-mode -p 100 -m 500
 
 cd ~/pestdemo/tussock_full
 rm -f simplified-outputs.txt
