@@ -146,8 +146,6 @@ kdcsomcr     none relative   8.000000E-05      0.00000001    0.9                
 * observation groups
 soilc
 soiln
-gppain
-nppain
 nppa
 tnup
 vcl
@@ -163,8 +161,6 @@ vsnr
  cminsum                 43404.0     3.1250000E-02        soilc
  onsum                   2206.00     6.0000000E-03        soiln
  ansum                   8.95800     6.0000000E-03        soiln
- gppain0                 2.02000         0.3125000       gppain
- nppain0                 1.01100               1.0       nppain
  nppa0                  0.541000               0.5         nppa
  tnup0                  6.000000E-03          20.00000         tnup
  vcl0                    4.14000              0.10          vcl
@@ -173,8 +169,6 @@ vsnr
  vsnl0                  0.130000          3.000000         vsnl
  vsns0                   1.13000          6.000000         vsns
  vsnr0                   1.02000          1.875000         vsnr
- gppain1                 37.7500         0.3125000       gppain
- nppain1                 18.8700               1.0       nppain
  nppa1                   10.0900               0.5         nppa
  tnup1                  8.900000E-02          20.00000         tnup
  vcl1                    15.0100              0.10          vcl
@@ -183,8 +177,6 @@ vsnr
  vsnl1                  0.470000          3.000000         vsnl
  vsns1                  0.490000          6.000000         vsns
  vsnr1                   1.21000          1.875000         vsnr
- gppain2                 32.4900         0.3125000       gppain
- nppain2                 16.2500               1.0       nppain
  nppa2                   8.68700               0.5         nppa
  tnup2                  0.117000          20.00000         tnup
  vcl2                    74.6100              0.10          vcl
@@ -193,8 +185,6 @@ vsnr
  vsnl2                   1.58000          3.000000         vsnl
  vsns2                   2.06000          6.000000         vsns
  vsnr2                   1.77000          1.875000         vsnr
- gppain3                 106.100         0.3125000       gppain
- nppain3                 53.0200               1.0       nppain
  nppa3                   28.3600               0.5         nppa
  tnup3                  0.636000          20.00000         tnup
  vcl3                    105.250              0.10          vcl
@@ -203,8 +193,6 @@ vsnr
  vsnl3                   4.72000          3.000000         vsnl
  vsns3                   0.00000          0.000000         vsns
  vsnr3                   7.48000          1.875000         vsnr
- gppain4                 29.5900         0.3125000       gppain
- nppain4                 14.8000               1.0       nppain
  nppa4                   7.91200               0.5         nppa
  tnup4                  0.155000          20.00000         tnup
  vcl4                   0.850000              0.10          vcl
@@ -213,8 +201,6 @@ vsnr
  vsnl4                  3.000000E-02          3.000000         vsnl
  vsns4                   0.00000          0.000000         vsns
  vsnr4                   1.81000          1.875000         vsnr
- gppain5                 34.6400         0.3125000       gppain
- nppain5                 17.3200               1.0       nppain
  nppa5                   9.26200               0.5         nppa
  tnup5                  1.000000E-02          20.00000         tnup
  vcl5                    42.7000              0.10          vcl
@@ -223,8 +209,6 @@ vsnr
  vsnl5                  0.690000          3.000000         vsnl
  vsns5                   0.00000          0.000000         vsns
  vsnr5                   0.00000          0.000000         vsnr
- gppain6                 24.7000         0.3125000       gppain
- nppain6                 12.3500               1.0       nppain
  nppa6                   6.61000               0.5         nppa
  tnup6                  6.600000E-02          20.00000         tnup
  vcl6                    37.2200              0.10          vcl
@@ -233,8 +217,6 @@ vsnr
  vsnl6                  0.560000          3.000000         vsnl
  vsns6                   0.00000          0.000000         vsns
  vsnr6                   0.00000          0.000000         vsnr
- gppain7                 22.2200         0.3125000       gppain
- nppain7                 11.1100               1.0       nppain
  nppa7                   5.94100               0.5         nppa
  tnup7                  5.100000E-02          20.00000         tnup
  vcl7                    86.8400              0.10          vcl

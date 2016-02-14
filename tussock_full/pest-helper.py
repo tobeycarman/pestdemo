@@ -35,8 +35,8 @@ def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
 
         # pft stuff
         for i in range(0, NUMPFTS):
-          f.write('gppain{0:<10} {1:>20}\n'.format(i, data['GPPAllIgnoringNitrogen'][i])) 
-          f.write('nppain{0:<10} {1:>20}\n'.format(i, data['NPPAllIgnoringNitrogen'][i]))
+          #f.write('gppain{0:<10} {1:>20}\n'.format(i, data['GPPAllIgnoringNitrogen'][i])) 
+          #f.write('nppain{0:<10} {1:>20}\n'.format(i, data['NPPAllIgnoringNitrogen'][i]))
           f.write('nppa{0:<10} {1:>20}\n'.format(i, data['NPPAll'][i]))
           f.write('tnup{0:<10} {1:>20}\n'.format(i, data['Nuptake'][i]))
           f.write('vcl{0:<10} {1:>20}\n'.format(i, data['VegCarbon']['Leaf'][i]))
@@ -77,8 +77,8 @@ def dvmdostemjson2pestobs(outfile):
     # pft stuff
     for i in range(0, NUMPFTS):
       pftkey = 'PFT%i' % (i)
-      f.write('gppain%s,%s\n' % (i, fdata[pftkey]['GPPAllIgnoringNitrogen']))
-      f.write('nppain%s,%s\n' % (i, fdata[pftkey]['NPPAllIgnoringNitrogen']))
+      #f.write('gppain%s,%s\n' % (i, fdata[pftkey]['GPPAllIgnoringNitrogen']))
+      #f.write('nppain%s,%s\n' % (i, fdata[pftkey]['NPPAllIgnoringNitrogen']))
       f.write('nppa%s,%s\n' % (i, fdata[pftkey]['NPPAll']))
       f.write('tnup%s,%s\n' % (i, fdata[pftkey]['TotNitrogenUptake'])) # is Nuptake in calibration_targets.py
       f.write('vcl%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf']))
@@ -87,6 +87,7 @@ def dvmdostemjson2pestobs(outfile):
       f.write('vsnl%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Leaf']))
       f.write('vsns%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Stem']))
       f.write('vsnr%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Root']))
+
 
 def build_ins(outfile):
 
@@ -103,8 +104,8 @@ def build_ins(outfile):
     f.write("l1 @,@ !ansum!\n")
     
     for i in range(0, NUMPFTS):
-      f.write("l1 @,@ !gppain%s!\n" % (i))
-      f.write("l1 @,@ !nppain%s!\n" % (i))
+      #f.write("l1 @,@ !gppain%s!\n" % (i))
+      #f.write("l1 @,@ !nppain%s!\n" % (i))
       f.write("l1 @,@ !nppa%s!\n" % (i))
       f.write("l1 @,@ !tnup%s!\n" % (i))
       f.write("l1 @,@ !vcl%s!\n" % (i))
