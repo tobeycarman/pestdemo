@@ -52,16 +52,20 @@ def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
   os.remove("calibration_targets.py")
   os.remove("calibration_targets.pyc")
 
-def dvmdostemjson2pestobs(outfile):
+def dvmdostemjson2pestobs(outfile, data_root='/tmp/dvmdostem'):
+
+  path = os.path.join(data_root, 'calibration/yearly/')
 
   NUMPFTS = 8
-  files = sorted( glob.glob('%s/*.json' % '/tmp/dvmdostem/calibration/yearly/') )
+  files = sorted( glob.glob('%s/*.json' % path) )
   print "Found %s files." % (len(files)) 
 
   # Open the last file.
   # NOTE: May want to take average of last X files (years)??
+  print "Reading from: %s" % (files[-1]) 
   with open(files[-1]) as f:
     fdata = json.load(f)
+
   print "Writing simplified outputs to: %s" % (outfile) 
   with open(outfile, 'w') as f:
     f.write("Variable,Value\n")
@@ -147,6 +151,9 @@ if __name__ == '__main__':
   parser.add_argument('--json-to-obs', nargs=1, metavar=('outputfile'), 
       help=textwrap.dedent('''Translate dvm-dos-tem calibration json file into simplified csv file for parsing with PEST ins file.'''))
 
+  parser.add_argument('--pid-tag', nargs=1, metavar=('PIDTAG'),
+      help=textwrap.dedent("""Look for json files in '/tmp/dvmdostem-%(metavar)s'"""))
+
   parser.add_argument('--build-ins', nargs=1, metavar=('outputfile'),
       help=textwrap.dedent('''Create an instruction file for reading a simplfied csv file.'''))
 
@@ -156,8 +163,17 @@ if __name__ == '__main__':
   args = parser.parse_args()
   print args
 
+  if args.pid_tag and (not args.json_to_obs):
+  	print "If you pass a pid tag, you must also use --json-to-obs. Quitting."
+  	exit(-1)
+
   if args.json_to_obs:
-    dvmdostemjson2pestobs(args.json_to_obs[0])
+    if args.pid_tag:
+      drt = '/tmp/dvmdostem-%s' % (args.pid_tag[0])
+    else: 
+      drt = '/tmp/dvmdostem'
+
+    dvmdostemjson2pestobs(args.json_to_obs[0], data_root=drt)
 
   if args.build_ins:
     build_ins(args.build_ins[0])
