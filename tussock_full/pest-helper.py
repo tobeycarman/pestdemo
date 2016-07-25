@@ -160,6 +160,9 @@ if __name__ == '__main__':
   parser.add_argument('--targets2obs', nargs=1, metavar=('outputfile'),
       help=textwrap.dedent('''Copy values from a calibration_targets.py file into a .obf file.'''))
 
+  parser.add_argument('--json-location', nargs=1, metavar=('jsonlocation'),
+      help=textwrap.dedent('''The root location for the expected json file tree'''))
+
   args = parser.parse_args()
   print args
 
@@ -168,10 +171,16 @@ if __name__ == '__main__':
   	exit(-1)
 
   if args.json_to_obs:
+    
+    if args.json_location:
+      root_loc = args.json_location[0]
+    else:
+      root_loc = '/tmp/'  
+    print "Looking to this for root of expected calibraiton json file tree: %s" % (root_loc)
     if args.pid_tag:
-      drt = '/tmp/dvmdostem-%s' % (args.pid_tag[0])
+      drt = os.path.join(root_loc, 'dvmdostem-%s'%(args.pid_tag[0]))
     else: 
-      drt = '/tmp/dvmdostem'
+      drt = os.path.join(root_loc, 'dvmdostem')
 
     dvmdostemjson2pestobs(args.json_to_obs[0], data_root=drt)
 
