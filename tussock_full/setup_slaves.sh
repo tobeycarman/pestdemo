@@ -1,94 +1,88 @@
 #!/bin/bash
 
-# idea for script to setup a slave for a PEST Run...
+# Helper script for parallel PEST run.
 
-# assumptions:
-#  - you have a copy of the dvmdostem repo in your home directory
-#  - you have a copy of the pestdemo repo in your home directory
+# Tobey Carman
+# July 2016
 
-#  - this script may create (and eventually delete?) N subdirecrories in
-#    your ~/ folder, one for each slave
+function usage () {
+  echo "Usage:
+  
+    ./setup_slaves.sh [ -h | --help | --cleanup | NSLAVES ]
 
+       -h, --help  Show this message and quit.
+       --cleanup   The program will delete all directories matching $HOME/slv-*
+       NSLAVES     Program will create directories matching $HOME/slv-00000
+  "
+}
 
-# 1) make x subdirectorys
-mkdir -p ~/s1
-mkdir -p ~/s2
-mkdir -p ~/s3
-mkdir -p ~/s4
-mkdir -p ~/s5
-mkdir -p ~/s6
+function cleanup () {
+  
+  find $HOME -type d -name "slv-*" 2>/dev/null | xargs rm -rf
 
+#   DIRLIST=$( find $HOME -type d -name "slv-*" 2>/dev/null )
+#   echo "Forcibly removing these directories:"
+#   for i in "${DIRLIST[@]}"
+#   do
+#     echo "$i"
+#     rm -rf "$i"
+#   done  
+}
 
-# 2) copy config, params from ~/dvmdostem/ to each slave directory
-mkdir -p ~/s1/config && cp -r ~/dvm-dos-tem/config ~/s1/
-mkdir -p ~/s2/config && cp -r ~/dvm-dos-tem/config ~/s2/
-mkdir -p ~/s3/config && cp -r ~/dvm-dos-tem/config ~/s3/
-mkdir -p ~/s4/config && cp -r ~/dvm-dos-tem/config ~/s4/
-mkdir -p ~/s5/config && cp -r ~/dvm-dos-tem/config ~/s5/
-mkdir -p ~/s6/config && cp -r ~/dvm-dos-tem/config ~/s6/
+NSLAVES=
 
+# Check that user supplied exactly one argument
+if [[ "$#" -ne 1 ]]
+then
+  usage
+  exit -1
+fi
 
-mkdir -p ~/s1/parameters && cp -r ~/dvm-dos-tem/parameters ~/s1/
-mkdir -p ~/s2/parameters && cp -r ~/dvm-dos-tem/parameters ~/s2/
-mkdir -p ~/s3/parameters && cp -r ~/dvm-dos-tem/parameters ~/s3/
-mkdir -p ~/s4/parameters && cp -r ~/dvm-dos-tem/parameters ~/s4/
-mkdir -p ~/s5/parameters && cp -r ~/dvm-dos-tem/parameters ~/s5/
-mkdir -p ~/s6/parameters && cp -r ~/dvm-dos-tem/parameters ~/s6/
+case $1 in
 
-mkdir -p ~/s1/output
-mkdir -p ~/s2/output
-mkdir -p ~/s3/output
-mkdir -p ~/s4/output
-mkdir -p ~/s5/output
-mkdir -p ~/s6/output
+  -h | --help )     usage
+                    exit 0
+                    ;;
 
-touch ~/s1/output/restart-eq.nc
-touch ~/s2/output/restart-eq.nc
-touch ~/s3/output/restart-eq.nc
-touch ~/s4/output/restart-eq.nc
-touch ~/s5/output/restart-eq.nc
-touch ~/s6/output/restart-eq.nc
+  --cleanup )       cleanup
+                    exit 0
+                    ;;
 
-# 4) modify the config file:
-  # - By clever workings, it looks like it si poosible to generalize this enough to
-  # do it onece and then copy to all the ~/sN directories...
+  *)                NSLAVES=$1
+                    ;;
+esac
 
-cp ~/pestdemo/tussock_full/tussock_full.pst ~/s1/
-cp ~/pestdemo/tussock_full/tussock_full.pst ~/s2/
-cp ~/pestdemo/tussock_full/tussock_full.pst ~/s3/
-cp ~/pestdemo/tussock_full/tussock_full.pst ~/s4/
-cp ~/pestdemo/tussock_full/tussock_full.pst ~/s5/
-cp ~/pestdemo/tussock_full/tussock_full.pst ~/s6/
+# Check that the argument supplied can be converted to an integer...
+python -c "int($NSLAVES)" > /dev/null 2>&1
+if [[ $? -ne 0 ]]
+then
+  usage
+  echo "ERROR: '$NSLAVES' cannot be converted to an integer!"
+  exit -1
+fi
 
-# copy the pest controlfile, template, wrapper, and helper 
-# from ~/pestdemo to each slave directory
-cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl ~/s1
-cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl ~/s2
-cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl ~/s3
-cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl ~/s4
-cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl ~/s5
-cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl ~/s6
+echo "Will try creating directory structure for $NSLAVES..."
+if [[ $NSLAVES -gt 25 ]]
+then
+  echo "I refuse. Thats too many directories to create!"
+  exit -1
+fi
 
-cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh ~/s1
-cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh ~/s2
-cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh ~/s3
-cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh ~/s4
-cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh ~/s5
-cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh ~/s6
+for (( i=0; i <= $NSLAVES; ++i ))
+do
+  printf -v ZPNUM "%05d" $i # Zero padded number
+  FULL_SPATH="$HOME/slv-$ZPNUM"
 
-cp ~/pestdemo/tussock_full/read-simple-outputs.ins ~/s1
-cp ~/pestdemo/tussock_full/read-simple-outputs.ins ~/s2
-cp ~/pestdemo/tussock_full/read-simple-outputs.ins ~/s3
-cp ~/pestdemo/tussock_full/read-simple-outputs.ins ~/s4
-cp ~/pestdemo/tussock_full/read-simple-outputs.ins ~/s5
-cp ~/pestdemo/tussock_full/read-simple-outputs.ins ~/s6
+  mkdir -p $FULL_SPATH
+  mkdir -p $FULL_SPATH/config && cp -r ~/dvm-dos-tem/config $FULL_SPATH/
+  mkdir -p $FULL_SPATH/parameters && cp -r ~/dvm-dos-tem/parameters $FULL_SPATH/
+  mkdir -p $FULL_SPATH/output
+  touch $FULL_SPATH/output/restart-eq.nc
+  cp ~/pestdemo/tussock_full/tussock_full.pst $FULL_SPATH
+  cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl $FULL_SPATH
+  cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh $FULL_SPATH
+  cp ~/pestdemo/tussock_full/read-simple-outputs.ins $FULL_SPATH
+  cp ~/pestdemo/tussock_full/pest-helper.py $FULL_SPATH
 
-cp ~/pestdemo/tussock_full/pest-helper.py ~/s1
-cp ~/pestdemo/tussock_full/pest-helper.py ~/s2
-cp ~/pestdemo/tussock_full/pest-helper.py ~/s3
-cp ~/pestdemo/tussock_full/pest-helper.py ~/s4
-cp ~/pestdemo/tussock_full/pest-helper.py ~/s5
-cp ~/pestdemo/tussock_full/pest-helper.py ~/s6
-
-
+done
 
