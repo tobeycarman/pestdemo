@@ -13,25 +13,25 @@ usage () {
        -h, --help  Show this message and quit.
        --list      Show info about any existing worker directories
        --cleanup   The program will delete all directories and log files matching
-                   '$HOME/slv-*' and '$HOME/slv-*.log'
-       --start     The program will start a worker in each directory matching '$HOME/slv-*'
-       NWORKERS     Program will create N directories starting with '$HOME/slv-00000'
+                   '$HOME/wrkr-*' and '$HOME/wrkr-*.log'
+       --start     The program will start a worker in each directory matching '$HOME/wrkr-*'
+       NWORKERS     Program will create N directories starting with '$HOME/wrkr-00000'
   "
 }
 
 list_workers() {
-  find $HOME -type d -name "slv-*" 
+  find $HOME -type d -name "wrkr-*" 
 }
 
 cleanup () {
 
-  find $HOME -type d -name "slv-*" -print0 2>/dev/null| while IFS= read -r -d '' worker_dir
+  find $HOME -type d -name "wrkr-*" -print0 2>/dev/null| while IFS= read -r -d '' worker_dir
   do
     rm -rf $worker_dir
     echo "Removed '$worker_dir'."
   done
 
-  find $HOME -type f -name "slv-*.log" -print0 2>/dev/null | while IFS= read -r -d '' log_file
+  find $HOME -type f -name "wrkr-*.log" -print0 2>/dev/null | while IFS= read -r -d '' log_file
   do
     rm $log_file
     echo "Removed '$log_file'."
@@ -62,7 +62,7 @@ setup_workers() {
   for (( i=0; i <= $NWORKERS; ++i ))
   do
     printf -v ZPNUM "%05d" $i # Zero padded number
-    FULL_SPATH="$HOME/slv-$ZPNUM"
+    FULL_SPATH="$HOME/wrkr-$ZPNUM"
 
     mkdir -p $FULL_SPATH
     mkdir -p $FULL_SPATH/config && cp -r ~/dvm-dos-tem/config $FULL_SPATH/
@@ -80,8 +80,8 @@ setup_workers() {
 
 start_workers() {
 
-  # look for slv-* directories
-  find $HOME -type d -name "slv-*" -print0 |  while IFS= read -r -d '' worker_dir
+  # look for wrkr-* directories
+  find $HOME -type d -name "wrkr-*" -print0 |  while IFS= read -r -d '' worker_dir
   do
     BN=$(basename "$worker_dir")
     cd "$worker_dir" && pestpp tussock_full.pst/H :5050 > "$HOME/$BN.log" 2>&1 &
