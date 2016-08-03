@@ -11,22 +11,28 @@ usage () {
     ./setup_slaves.sh [ -h | --help | --cleanup | NSLAVES ]
 
        -h, --help  Show this message and quit.
-       --cleanup   The program will delete all directories matching $HOME/slv-*
-       NSLAVES     Program will create directories matching $HOME/slv-00000
+       --cleanup   The program will delete all directories matching $HOME/slv-* and
+                   log files matching '$HOME/slv-*.log'.
+       NSLAVES     Program will create N directories starting with $HOME/slv-00000
   "
 }
 
 cleanup () {
-  
-  find $HOME -type d -name "slv-*" 2>/dev/null | xargs rm -rf
 
-#   DIRLIST=$( find $HOME -type d -name "slv-*" 2>/dev/null )
-#   echo "Forcibly removing these directories:"
-#   for i in "${DIRLIST[@]}"
-#   do
-#     echo "$i"
-#     rm -rf "$i"
-#   done  
+  #find $HOME -type d -name "slv-*" 2>/dev/null | xargs rm -rf
+  find $HOME -type d -name "slv-*" -print0 2>/dev/null| while IFS= read -r -d '' slave_dir
+  do
+    rm -rf $slave_dir
+    echo "Removed '$slave_dir'."
+  done
+
+  find $HOME -type f -name "slv-*.log" -print0 2>/dev/null | while IFS= read -r -d '' log_file
+  do
+    rm $log_file
+    echo "Removed '$log_file'."
+  done
+
+}
 }
 
 NSLAVES=
