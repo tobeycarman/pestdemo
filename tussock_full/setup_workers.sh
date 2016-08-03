@@ -30,13 +30,13 @@ cleanup () {
   find $HOME -type d -name "wrkr-*" -print0 2>/dev/null| while IFS= read -r -d '' worker_dir
   do
     rm -rf $worker_dir
-    echo "Removed '$worker_dir'."
+    echo "Removed '$worker_dir'"
   done
 
   find $HOME -type f -name "wrkr-*.log" -print0 2>/dev/null | while IFS= read -r -d '' log_file
   do
     rm $log_file
-    echo "Removed '$log_file'."
+    echo "Removed '$log_file'"
   done
 
   find $HOME -type d -name "master-*" -print0 2>/dev/null| while IFS= read -r -d '' master_dir
