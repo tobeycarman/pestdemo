@@ -33,6 +33,46 @@ cleanup () {
   done
 
 }
+
+setup_slaves() {
+
+  NSLAVES=$1
+
+  # Check that the argument supplied can be converted to an integer...
+  python -c "int($NSLAVES)" > /dev/null 2>&1
+  if [[ $? -ne 0 ]]
+  then
+    usage
+    echo "ERROR: '$NSLAVES' cannot be converted to an integer!"
+    exit -1
+  fi
+
+  echo "Will try creating directory structure for $NSLAVES..."
+  if [[ $NSLAVES -gt 25 ]]
+  then
+    echo "I refuse. Thats too many directories to create!"
+    exit -1
+  fi
+
+  for (( i=0; i <= $NSLAVES; ++i ))
+  do
+    printf -v ZPNUM "%05d" $i # Zero padded number
+    FULL_SPATH="$HOME/slv-$ZPNUM"
+
+    mkdir -p $FULL_SPATH
+    mkdir -p $FULL_SPATH/config && cp -r ~/dvm-dos-tem/config $FULL_SPATH/
+    mkdir -p $FULL_SPATH/parameters && cp -r ~/dvm-dos-tem/parameters $FULL_SPATH/
+    mkdir -p $FULL_SPATH/output
+    touch $FULL_SPATH/output/restart-eq.nc
+    cp ~/pestdemo/tussock_full/tussock_full.pst $FULL_SPATH
+    cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl $FULL_SPATH
+    cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh $FULL_SPATH
+    cp ~/pestdemo/tussock_full/read-simple-outputs.ins $FULL_SPATH
+    cp ~/pestdemo/tussock_full/pest-helper.py $FULL_SPATH
+
+  done
+}
+
 }
 
 NSLAVES=
@@ -55,40 +95,7 @@ case $1 in
                     ;;
 
   *)                NSLAVES=$1
+                    setup_slaves $NSLAVES
                     ;;
 esac
-
-# Check that the argument supplied can be converted to an integer...
-python -c "int($NSLAVES)" > /dev/null 2>&1
-if [[ $? -ne 0 ]]
-then
-  usage
-  echo "ERROR: '$NSLAVES' cannot be converted to an integer!"
-  exit -1
-fi
-
-echo "Will try creating directory structure for $NSLAVES..."
-if [[ $NSLAVES -gt 25 ]]
-then
-  echo "I refuse. Thats too many directories to create!"
-  exit -1
-fi
-
-for (( i=0; i <= $NSLAVES; ++i ))
-do
-  printf -v ZPNUM "%05d" $i # Zero padded number
-  FULL_SPATH="$HOME/slv-$ZPNUM"
-
-  mkdir -p $FULL_SPATH
-  mkdir -p $FULL_SPATH/config && cp -r ~/dvm-dos-tem/config $FULL_SPATH/
-  mkdir -p $FULL_SPATH/parameters && cp -r ~/dvm-dos-tem/parameters $FULL_SPATH/
-  mkdir -p $FULL_SPATH/output
-  touch $FULL_SPATH/output/restart-eq.nc
-  cp ~/pestdemo/tussock_full/tussock_full.pst $FULL_SPATH
-  cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl $FULL_SPATH
-  cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh $FULL_SPATH
-  cp ~/pestdemo/tussock_full/read-simple-outputs.ins $FULL_SPATH
-  cp ~/pestdemo/tussock_full/pest-helper.py $FULL_SPATH
-
-done
 
