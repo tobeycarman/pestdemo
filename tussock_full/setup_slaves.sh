@@ -18,6 +18,10 @@ usage () {
   "
 }
 
+list_workers() {
+  find $HOME -type d -name "slv-*" 
+}
+
 cleanup () {
 
   find $HOME -type d -name "slv-*" -print0 2>/dev/null| while IFS= read -r -d '' slave_dir
@@ -97,6 +101,10 @@ fi
 case $1 in
 
   -h | --help )     usage
+                    exit 0
+                    ;;
+
+  --list )          list_workers
                     exit 0
                     ;;
 
