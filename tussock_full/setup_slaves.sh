@@ -8,13 +8,13 @@
 usage () {
   echo "Usage:
 
-    ./setup_slaves.sh [ -h | --help | --cleanup | NSLAVES ]
+    ./setup_workers.sh [ -h | --help | --cleanup | NWORKERS ]
 
        -h, --help  Show this message and quit.
        --cleanup   The program will delete all directories and log files matching
                    '$HOME/slv-*' and '$HOME/slv-*.log'
-       --start     The program will start a slave in each directory matching '$HOME/slv-*'
-       NSLAVES     Program will create N directories starting with '$HOME/slv-00000'
+       --start     The program will start a worker in each directory matching '$HOME/slv-*'
+       NWORKERS     Program will create N directories starting with '$HOME/slv-00000'
   "
 }
 
@@ -24,10 +24,10 @@ list_workers() {
 
 cleanup () {
 
-  find $HOME -type d -name "slv-*" -print0 2>/dev/null| while IFS= read -r -d '' slave_dir
+  find $HOME -type d -name "slv-*" -print0 2>/dev/null| while IFS= read -r -d '' worker_dir
   do
-    rm -rf $slave_dir
-    echo "Removed '$slave_dir'."
+    rm -rf $worker_dir
+    echo "Removed '$worker_dir'."
   done
 
   find $HOME -type f -name "slv-*.log" -print0 2>/dev/null | while IFS= read -r -d '' log_file
@@ -38,27 +38,27 @@ cleanup () {
 
 }
 
-setup_slaves() {
+setup_workers() {
 
-  NSLAVES=$1
+  NWORKERS=$1
 
   # Check that the argument supplied can be converted to an integer...
-  python -c "int($NSLAVES)" > /dev/null 2>&1
+  python -c "int($NWORKERS)" > /dev/null 2>&1
   if [[ $? -ne 0 ]]
   then
     usage
-    echo "ERROR: '$NSLAVES' cannot be converted to an integer!"
+    echo "ERROR: '$NWORKERS' cannot be converted to an integer!"
     exit -1
   fi
 
-  echo "Will try creating directory structure for $NSLAVES..."
-  if [[ $NSLAVES -gt 25 ]]
+  echo "Will try creating directory structure for $NWORKERS..."
+  if [[ $NWORKERS -gt 25 ]]
   then
     echo "I refuse. Thats too many directories to create!"
     exit -1
   fi
 
-  for (( i=0; i <= $NSLAVES; ++i ))
+  for (( i=0; i <= $NWORKERS; ++i ))
   do
     printf -v ZPNUM "%05d" $i # Zero padded number
     FULL_SPATH="$HOME/slv-$ZPNUM"
@@ -77,20 +77,20 @@ setup_slaves() {
   done
 }
 
-start_slaves() {
+start_workers() {
 
   # look for slv-* directories
-  find $HOME -type d -name "slv-*" -print0 |  while IFS= read -r -d '' slave_dir
+  find $HOME -type d -name "slv-*" -print0 |  while IFS= read -r -d '' worker_dir
   do
-    BN=$(basename "$slave_dir")
-    cd "$slave_dir" && pestpp tussock_full.pst/H :5050 > "$HOME/$BN.log" 2>&1 &
+    BN=$(basename "$worker_dir")
+    cd "$worker_dir" && pestpp tussock_full.pst/H :5050 > "$HOME/$BN.log" 2>&1 &
     PID=$!
-    echo "Started slave with pid=$PID in: '$slave_dir'"
+    echo "Started worker with pid=$PID in: '$worker_dir'"
   done
 }
 
 
-NSLAVES=
+NWORKERS=
 # Check that user supplied exactly one argument
 if [[ "$#" -ne 1 ]]
 then
@@ -112,12 +112,12 @@ case $1 in
                     exit 0
                     ;;
 
-  --start )         start_slaves
+  --start )         start_workers
                     exit 0
                     ;;
 
-  *)                NSLAVES=$1
-                    setup_slaves $NSLAVES
+  *)                NWORKERS=$1
+                    setup_workers $NWORKERS
                     ;;
 esac
 
