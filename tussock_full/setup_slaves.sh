@@ -5,7 +5,7 @@
 # Tobey Carman
 # July 2016
 
-function usage () {
+usage () {
   echo "Usage:
   
     ./setup_slaves.sh [ -h | --help | --cleanup | NSLAVES ]
@@ -16,7 +16,7 @@ function usage () {
   "
 }
 
-function cleanup () {
+cleanup () {
   
   find $HOME -type d -name "slv-*" 2>/dev/null | xargs rm -rf
 
