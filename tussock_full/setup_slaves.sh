@@ -11,16 +11,15 @@ usage () {
     ./setup_slaves.sh [ -h | --help | --cleanup | NSLAVES ]
 
        -h, --help  Show this message and quit.
-       --cleanup   The program will delete all directories matching $HOME/slv-* and
-                   log files matching '$HOME/slv-*.log'.
-       --start     The program will start a slave in each directory matching $HOME/slv-*
-       NSLAVES     Program will create N directories starting with $HOME/slv-00000
+       --cleanup   The program will delete all directories and log files matching
+                   '$HOME/slv-*' and '$HOME/slv-*.log'
+       --start     The program will start a slave in each directory matching '$HOME/slv-*'
+       NSLAVES     Program will create N directories starting with '$HOME/slv-00000'
   "
 }
 
 cleanup () {
 
-  #find $HOME -type d -name "slv-*" 2>/dev/null | xargs rm -rf
   find $HOME -type d -name "slv-*" -print0 2>/dev/null| while IFS= read -r -d '' slave_dir
   do
     rm -rf $slave_dir
@@ -86,8 +85,8 @@ start_slaves() {
   done
 }
 
-NSLAVES=
 
+NSLAVES=
 # Check that user supplied exactly one argument
 if [[ "$#" -ne 1 ]]
 then
