@@ -11,6 +11,7 @@ usage () {
     ./setup_workers.sh [ -h | --help | --cleanup | NWORKERS ]
 
        -h, --help  Show this message and quit.
+       --list      Show info about any existing worker directories
        --cleanup   The program will delete all directories and log files matching
                    '$HOME/slv-*' and '$HOME/slv-*.log'
        --start     The program will start a worker in each directory matching '$HOME/slv-*'
