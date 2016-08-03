@@ -7,12 +7,13 @@
 
 usage () {
   echo "Usage:
-  
+
     ./setup_slaves.sh [ -h | --help | --cleanup | NSLAVES ]
 
        -h, --help  Show this message and quit.
        --cleanup   The program will delete all directories matching $HOME/slv-* and
                    log files matching '$HOME/slv-*.log'.
+       --start     The program will start a slave in each directory matching $HOME/slv-*
        NSLAVES     Program will create N directories starting with $HOME/slv-00000
   "
 }
@@ -73,6 +74,16 @@ setup_slaves() {
   done
 }
 
+start_slaves() {
+
+  # look for slv-* directories
+  find $HOME -type d -name "slv-*" -print0 |  while IFS= read -r -d '' slave_dir
+  do
+    BN=$(basename "$slave_dir")
+    cd "$slave_dir" && pestpp tussock_full.pst/H :5050 > "$HOME/$BN.log" 2>&1 &
+    PID=$!
+    echo "Started slave with pid=$PID in: '$slave_dir'"
+  done
 }
 
 NSLAVES=
@@ -91,6 +102,10 @@ case $1 in
                     ;;
 
   --cleanup )       cleanup
+                    exit 0
+                    ;;
+
+  --start )         start_slaves
                     exit 0
                     ;;
 
