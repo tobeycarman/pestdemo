@@ -67,12 +67,12 @@ setup_workers() {
     exit -1
   fi
 
-  echo "Will attempt to create directory structure for $NWORKERS workers and one master..."
-  if [[ $NWORKERS -gt 25 ]]
-  then
-    echo "I refuse. Thats too many directories to create!"
-    exit -1
-  fi
+  #   echo "Will attempt to create directory structure for $NWORKERS workers and one master..."
+  #   if [[ $NWORKERS -gt 25 ]]
+  #   then
+  #     echo "I refuse. Thats too many directories to create!"
+  #     exit -1
+  #   fi
 
   for (( i=0; i <= $NWORKERS; ++i ))
   do
