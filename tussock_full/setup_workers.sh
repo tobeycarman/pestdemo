@@ -5,47 +5,61 @@
 # Tobey Carman
 # July 2016
 
+#WORKING_ROOT="$HOME"
+WORKING_ROOT="/atlas_scratch/$USER"
+
 usage () {
   echo "Usage:
 
     ./setup_workers.sh [ -h | --help | --cleanup | NWORKERS ]
 
        -h, --help  Show this message and quit.
-       --list      Show info about any existing worker directories
+       --list      Show info about any existing worker and master directories
+
        --cleanup   The program will delete all directories and log files matching
-                   '$HOME/wrkr-*', '$HOME/master-*' and '$HOME/wrkr-*.log' and '$HOME/master-*.log'
-       --start     The program will start a worker in each directory matching '$HOME/wrkr-*'
-       NWORKERS     Program will create N directories starting with '$HOME/wrkr-00000'
+                     '$WORKING_ROOT/wrkr-*'
+                     '$WORKING_ROOT/master-*'
+                     '$WORKING_ROOT/wrkr-*.log'
+                     '$WORKING_ROOT/master-*.log'
+
+       --start     The program will start a worker in each directory matching 
+                     '$WORKING_ROOT/wrkr-*'
+                   NOTE: For use on computers that don's have SLURM; if your computer 
+                   uses SLRUM, then submit via sbatch!
+
+       NWORKERS     Program will create N directories starting with
+                     '$WORKING_ROOT/master-00000' and 
+                     '$WORKING_ROOT/wrkr-00001'
   "
 }
 
 list_workers() {
-  find $HOME -type d -name "master-*"
-  find $HOME -type d -name "wrkr-*"
+  find $WORKING_ROOT -type d -name "master-*"
+  find $WORKING_ROOT -type d -name "wrkr-*"
 
 }
 
 cleanup () {
 
-  find $HOME -type d -name "wrkr-*" -print0 2>/dev/null| while IFS= read -r -d '' worker_dir
+  find $WORKING_ROOT -type d -name "wrkr-*" -print0 2>/dev/null | while IFS= read -r -d '' worker_dir
   do
     rm -rf $worker_dir
     echo "Removed '$worker_dir'"
   done
 
-  find $HOME -type f -name "wrkr-*.log" -print0 2>/dev/null | while IFS= read -r -d '' log_file
+  find $WORKING_ROOT -type f -name "wrkr-*.log" -print0 2>/dev/null | while IFS= read -r -d '' log_file
   do
     rm $log_file
     echo "Removed '$log_file'"
   done
 
-  find $HOME -type d -name "master-*" -print0 2>/dev/null| while IFS= read -r -d '' master_dir
+  find $WORKING_ROOT -type d -name "master-*" -print0 2>/dev/null | while IFS= read -r -d '' master_dir
   do
     rm -rf $master_dir
     echo "Removed '$master_dir'"
   done
 
-  find $HOME -type f -name "master-*.log" -print0 2>/dev/null | while IFS= read -r -d '' master_log
+  find $WORKING_ROOT -type f -name "master-*.log" -print0 2>/dev/null | while IFS= read -r -d '' master_log
   do
     rm $master_log
     echo "Removed '$master_log'"
@@ -77,44 +91,44 @@ setup_workers() {
   for (( i=0; i <= $NWORKERS; ++i ))
   do
     printf -v ZPNUM "%05d" $i # Zero padded number
-    FULL_SPATH="$HOME/wrkr-$ZPNUM"
+    FULL_SPATH="$WORKING_ROOT/wrkr-$ZPNUM"
 
     mkdir -p $FULL_SPATH
-    mkdir -p $FULL_SPATH/config && cp -r ~/dvm-dos-tem/config $FULL_SPATH/
-    mkdir -p $FULL_SPATH/parameters && cp -r ~/dvm-dos-tem/parameters $FULL_SPATH/
+    mkdir -p $FULL_SPATH/config && cp -r $WORKING_ROOT/dvm-dos-tem/config $FULL_SPATH/
+    mkdir -p $FULL_SPATH/parameters && cp -r $WORKING_ROOT/dvm-dos-tem/parameters $FULL_SPATH/
     mkdir -p $FULL_SPATH/output
-    touch $FULL_SPATH/output/restart-eq.nc
-    cp ~/pestdemo/tussock_full/tussock_full.pst $FULL_SPATH
-    cp ~/pestdemo/tussock_full/cmt_calparbgc.tpl $FULL_SPATH
-    cp ~/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh $FULL_SPATH
-    cp ~/pestdemo/tussock_full/read-simple-outputs.ins $FULL_SPATH
-    cp ~/pestdemo/tussock_full/pest-helper.py $FULL_SPATH
+    cp $WORKING_ROOT/dvm-dos-tem/DATA/Toolik_10x10_allyrs/output/* $FULL_SPATH/output
+    cp $WORKING_ROOT/pestdemo/tussock_full/tussock_full.pst $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/tussock_full/cmt_calparbgc.tpl $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/tussock_full/read-simple-outputs.ins $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/tussock_full/pest-helper.py $FULL_SPATH
 
   done
 
-  mv "$HOME/wrkr-00000" "$HOME/master-00000"
+  mv "$WORKING_ROOT/wrkr-00000" "$WORKING_ROOT/master-00000"
 }
 
 start_workers() {
 
-  find $HOME -type d -name "master-*" -print0 | while IFS= read -r -d '' master_dir
+  find $WORKING_ROOT -type d -name "master-*" -print0 | while IFS= read -r -d '' master_dir
   do
     echo "$master_dir"
-    echo "$HOME/master-00000"
-    # if [[ "$master_dir" -ne  "$HOME/master-00000" ]]
+    echo "$WORKING_ROOT/master-00000"
+    # if [[ "$master_dir" -ne  "$WORKING_ROOT/master-00000" ]]
     # then
     #   echo "Something is wrong! There should not be any other master directories present!"
     #   exit -1
     # fi
     BN=$(basename "$master_dir")
-    cd "$master_dir" && pestpp tussock_full.pst /H :5050 > "$HOME/$BN.log" 2>&1 &
+    cd "$master_dir" && pestpp tussock_full.pst /H :5050 > "$WORKING_ROOT/$BN.log" 2>&1 &
   done
 
   # look for wrkr-* directories
-  find $HOME -type d -name "wrkr-*" -print0 |  while IFS= read -r -d '' worker_dir
+  find $WORKING_ROOT -type d -name "wrkr-*" -print0 |  while IFS= read -r -d '' worker_dir
   do
     BN=$(basename "$worker_dir")
-    cd "$worker_dir" && pestpp tussock_full.pst /H localhost:5050 > "$HOME/$BN.log" 2>&1 &
+    cd "$worker_dir" && pestpp tussock_full.pst /H localhost:5050 > "$WORKING_ROOT/$BN.log" 2>&1 &
     PID=$!
     echo "Started worker with pid=$PID in: '$worker_dir'"
   done
