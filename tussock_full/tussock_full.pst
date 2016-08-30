@@ -13,25 +13,25 @@ restart  estimation
 70 5.0e-7
 0
 * parameter groups
-cmax         relative 0.01  0.0  switch  2.0 parabolic
-nmax         relative 0.01  0.0  switch  2.0 parabolic
-cfl          relative 0.01  0.0  switch  2.0 parabolic
-cfs          relative 0.01  0.0  switch  2.0 parabolic
-cfr          relative 0.01  0.0  switch  2.0 parabolic
-nfl          relative 0.01  0.0  switch  2.0 parabolic
-nfs          relative 0.01  0.0  switch  2.0 parabolic
-nfr          relative 0.01  0.0  switch  2.0 parabolic
-kra          relative 0.01  0.0  switch  2.0 parabolic
-krb0         relative 0.01  0.0  switch  2.0 parabolic
-krb1         relative 0.01  0.0  switch  2.0 parabolic
-krb2         relative 0.01  0.0  switch  2.0 parabolic
-frg          relative 0.01  0.0  switch  2.0 parabolic
-micbnup      relative 0.01  0.0  switch  2.0 parabolic
-kdcmoss      relative 0.01  0.0  switch  2.0 parabolic
-kdcrawc      relative 0.01  0.0  switch  2.0 parabolic
-kdcsoma      relative 0.01  0.0  switch  2.0 parabolic
-kdcsompr     relative 0.01  0.0  switch  2.0 parabolic
-kdcsomcr     relative 0.01  0.0  switch  2.0 parabolic
+cmax         relative 0.05  0.0  switch  2.0 parabolic
+nmax         relative 0.05  0.0  switch  2.0 parabolic
+cfl          relative 0.05  0.0  switch  2.0 parabolic
+cfs          relative 0.05  0.0  switch  2.0 parabolic
+cfr          relative 0.05  0.0  switch  2.0 parabolic
+nfl          relative 0.05  0.0  switch  2.0 parabolic
+nfs          relative 0.05  0.0  switch  2.0 parabolic
+nfr          relative 0.05  0.0  switch  2.0 parabolic
+kra          relative 0.05  0.0  switch  2.0 parabolic
+krb0         relative 0.05  0.0  switch  2.0 parabolic
+krb1         relative 0.05  0.0  switch  2.0 parabolic
+krb2         relative 0.05  0.0  switch  2.0 parabolic
+frg          relative 0.05  0.0  switch  2.0 parabolic
+micbnup      relative 0.05  0.0  switch  2.0 parabolic
+kdcmoss      relative 0.05  0.0  switch  2.0 parabolic
+kdcrawc      relative 0.05  0.0  switch  2.0 parabolic
+kdcsoma      relative 0.05  0.0  switch  2.0 parabolic
+kdcsompr     relative 0.05  0.0  switch  2.0 parabolic
+kdcsomcr     relative 0.05  0.0  switch  2.0 parabolic
 * parameter data
 cmax0        none relative      2.48277       1             50                 cmax            1.0000        0.0000      1
 cmax1        none relative      60.5364       1             150                cmax            1.0000        0.0000      1
