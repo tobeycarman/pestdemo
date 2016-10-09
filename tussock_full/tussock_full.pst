@@ -159,8 +159,8 @@ vsnr
  cshall                  3079.00     3.3750000E-03        soilc
  cdeep                   7703.00     3.3750000E-03        soilc
  cminsum                 43404.0     7.6950000E-05        soilc
- onsum                   2206.00     2.0000000E-02        soiln
- ansum                   8.95800     6.0000000E-01        soiln
+ onsum                   2206.00     4.2000000E-02        soiln
+ ansum                   8.95800          1.260000        soiln
  nppa0                  0.541000               0.5         nppa
  tnup0                  6.000000E-03          20.00000         tnup
  vcl0                    4.14000              0.10          vcl
