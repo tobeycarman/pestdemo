@@ -155,10 +155,10 @@ vsnl
 vsns
 vsnr
 * observation data
- mdc                     178.000     1.2375000E-02        soilc
- cshall                  3079.00     4.6875000E-04        soilc
- cdeep                   7703.00     4.6875000E-04        soilc
- cminsum                 43404.0     1.0687500E-05        soilc
+ mdc                     178.000     4.9500000E-02        soilc
+ cshall                  3079.00     1.8750000E-03        soilc
+ cdeep                   7703.00     1.8750000E-03        soilc
+ cminsum                 43404.0     4.2750000E-05        soilc
  onsum                   2206.00     2.0000000E-02        soiln
  ansum                   8.95800     6.0000000E-01        soiln
  nppa0                  0.541000               0.5         nppa
