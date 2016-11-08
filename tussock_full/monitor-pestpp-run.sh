@@ -27,14 +27,14 @@ report_workers() {
   for i in $(ls $WORKING_ROOT/wrkr-000*.log)
   do 
     echo "=== $i ===" 
-    tail -n 2 $i
+    tail -n 12 $i
     echo "---------------"
     echo ""
   done
 }
 
 report_master() {
-  tail -f $WORKING_ROOT/master-00000.log
+  tail -n 50 -f $WORKING_ROOT/master-00000.log
 }
 
 # Check that the user supplied at least one argument.

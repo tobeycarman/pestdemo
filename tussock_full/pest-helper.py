@@ -4,7 +4,7 @@ import json
 import glob
 import textwrap
 import argparse
-import os        # for removing temporarty file
+import os        # for removing temporary file
 import shutil    # for making temp copy of calibration targets to be imported
 
 
