@@ -1,0 +1,233 @@
+pcf
+* control data
+restart  estimation
+110   70   19     0     10
+1     1 double point   1   0   0
+20.0  -3   0.3  0.03    10
+3.0   3.0 0.001  0
+0.1
+-1 .01      4     5  .001     4
+1     1     1
+* singular value decomposition
+1
+70 5.0e-7
+0
+* parameter groups
+cmax         relative 0.05  0.0  switch  2.0 parabolic
+nmax         relative 0.05  0.0  switch  2.0 parabolic
+cfl          relative 0.05  0.0  switch  2.0 parabolic
+cfs          relative 0.05  0.0  switch  2.0 parabolic
+cfr          relative 0.05  0.0  switch  2.0 parabolic
+nfl          relative 0.05  0.0  switch  2.0 parabolic
+nfs          relative 0.05  0.0  switch  2.0 parabolic
+nfr          relative 0.05  0.0  switch  2.0 parabolic
+kra          relative 0.05  0.0  switch  2.0 parabolic
+krb0         relative 0.05  0.0  switch  2.0 parabolic
+krb1         relative 0.05  0.0  switch  2.0 parabolic
+krb2         relative 0.05  0.0  switch  2.0 parabolic
+frg          relative 0.05  0.0  switch  2.0 parabolic
+micbnup      relative 0.05  0.0  switch  2.0 parabolic
+kdcmoss      relative 0.05  0.0  switch  2.0 parabolic
+kdcrawc      relative 0.05  0.0  switch  2.0 parabolic
+kdcsoma      relative 0.05  0.0  switch  2.0 parabolic
+kdcsompr     relative 0.05  0.0  switch  2.0 parabolic
+kdcsomcr     relative 0.05  0.0  switch  2.0 parabolic
+* parameter data
+cmax0        none relative     62.5          1             70                 cmax            1.0000        0.0000      1
+cmax1        none relative     82.12105      1             150                cmax            1.0000        0.0000      1
+cmax2        none relative     80.7951375    1             150                cmax            1.0000        0.0000      1
+cmax3        none relative     207.711625    1             300                cmax            1.0000        0.0000      1
+cmax4        none relative     65.41755      1             150                cmax            1.0000        0.0000      1
+cmax5        none relative     127.448475    1             200                cmax            1.0000        0.0000      1
+cmax6        none relative     96.614375     1             150                cmax            1.0000        0.0000      1
+cmax7        none relative     120.9593      1             200                cmax            1.0000        0.0000      1
+nmax0        none relative     0.910695       0.2           3                  nmax            1.0000        0.0000      1
+nmax1        none relative      3.91897       0.2           12                 nmax            1.0000        0.0000      1
+nmax2        none relative      2.93717       0.2           6                  nmax            1.0000        0.0000      1
+nmax3        none relative      5.87128       0.2           20                 nmax            1.0000        0.0000      1
+nmax4        none relative      2.30708       0.2           9                  nmax            1.0000        0.0000      1
+nmax5        none relative            3       0.2           9                  nmax            1.0000        0.0000      1
+nmax6        none relative          2.1       0.2           6                  nmax            1.0000        0.0000      1
+nmax7        none relative            3       0.2           9                  nmax            1.0000        0.0000      1
+cfalll0      none relative        0.083       0.001         1                  cfl             1.0000        0.0000      1
+cfalll1      none relative        0.083       0.001         1                  cfl             1.0000        0.0000      1
+cfalll2      none relative        0.058       0.001         1                  cfl             1.0000        0.0000      1
+cfalll3      none relative    0.0829999       0.001         1                  cfl             1.0000        0.0000      1
+cfalll4      none relative    0.0830001       0.001         1                  cfl             1.0000        0.0000      1
+cfalll5      none relative        0.009       0.001         1                  cfl             1.0000        0.0000      1
+cfalll6      none relative        0.011       0.001         1                  cfl             1.0000        0.0000      1
+cfalll7      none relative        0.021       0.001         1                  cfl             1.0000        0.0000      1
+cfalls0      none relative        0.007       0.001         1                  cfs             1.0000        0.0000      1
+cfalls1      none relative        0.015       0.001         1                  cfs             1.0000        0.0000      1
+cfalls2      none relative        0.014       0.001         1                  cfs             1.0000        0.0000      1
+cfalls3     fixed relative            0       0.0           1                  cfs             1.0000        0.0000      1
+cfalls4     fixed relative            0       0.0           1                  cfs             1.0000        0.0000      1
+cfalls5     fixed relative            0       0.0           1                  cfs             1.0000        0.0000      1
+cfalls6     fixed relative            0       0.0           1                  cfs             1.0000        0.0000      1
+cfalls7     fixed relative            0       0.0           1                  cfs             1.0000        0.0000      1
+cfallr0      none relative        0.051       0.001         1                  cfr             1.0000        0.0000      1
+cfallr1      none relative        0.059       0.001         1                  cfr             1.0000        0.0000      1
+cfallr2      none relative        0.079       0.001         1                  cfr             1.0000        0.0000      1
+cfallr3      none relative    0.0829999       0.001         1                  cfr             1.0000        0.0000      1
+cfallr4      none relative    0.0510001       0.001         1                  cfr             1.0000        0.0000      1
+cfallr5     fixed relative            0       0.0           1                  cfr             1.0000        0.0000      1
+cfallr6     fixed relative            0       0.0           1                  cfr             1.0000        0.0000      1
+cfallr7     fixed relative            0       0.0           1                  cfr             1.0000        0.0000      1
+nfalll0      none relative    0.0199992       0.001         1                  nfl             1.0000        0.0000      1
+nfalll1      none relative    0.0210693       0.001         1                  nfl             1.0000        0.0000      1
+nfalll2      none relative    0.0219993       0.001         1                  nfl             1.0000        0.0000      1
+nfalll3      none relative    0.0252403       0.001         1                  nfl             1.0000        0.0000      1
+nfalll4      none relative     0.021711       0.001         1                  nfl             1.0000        0.0000      1
+nfalll5      none relative        0.002       0.001         1                  nfl             1.0000        0.0000      1
+nfalll6      none relative   0.00199999       0.001         1                  nfl             1.0000        0.0000      1
+nfalll7      none relative        0.002       0.001         1                  nfl             1.0000        0.0000      1
+nfalls0      none relative   0.00399999       0.001         1                  nfs             1.0000        0.0000      1
+nfalls1      none relative   0.00799979       0.001         1                  nfs             1.0000        0.0000      1
+nfalls2      none relative   0.00800365       0.001         1                  nfs             1.0000        0.0000      1
+nfalls3     fixed relative            0       0.0           1                  nfs             1.0000        0.0000      1
+nfalls4     fixed relative            0       0.0           1                  nfs             1.0000        0.0000      1
+nfalls5     fixed relative            0       0.0           1                  nfs             1.0000        0.0000      1
+nfalls6     fixed relative            0       0.0           1                  nfs             1.0000        0.0000      1
+nfalls7     fixed relative            0       0.0           1                  nfs             1.0000        0.0000      1
+nfallr0      none relative        0.011       0.001         1                  nfr             1.0000        0.0000      1
+nfallr1      none relative    0.0114839       0.001         1                  nfr             1.0000        0.0000      1
+nfallr2      none relative    0.0168615       0.001         1                  nfr             1.0000        0.0000      1
+nfallr3      none relative    0.0215272       0.001         1                  nfr             1.0000        0.0000      1
+nfallr4      none relative    0.0150431       0.001         1                  nfr             1.0000        0.0000      1
+nfallr5     fixed relative            0       0.0           1                  nfr             1.0000        0.0000      1
+nfallr6     fixed relative            0       0.0           1                  nfr             1.0000        0.0000      1
+nfallr7     fixed relative            0       0.0           1                  nfr             1.0000        0.0000      1
+kra0        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+kra1        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+kra2        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+kra3        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+kra4        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+kra5        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+kra6        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+kra7        fixed relative    -8.06e-05      -2.0           1.00E+000          kra             1.0000        0.0000      1
+krb00        none relative   -0.0519492875   -10.0           -0.001             krb0            1.0000        0.0000      1
+krb01        none relative   -2.8875         -10.0           -0.001             krb0            1.0000        0.0000      1
+krb02        none relative   -3.025          -10.0           -0.001             krb0            1.0000        0.0000      1
+krb03        none relative   -0.001375       -10.0           -0.001             krb0            1.0000        0.0000      1
+krb04        none relative   -2.8875         -10.0           -0.001             krb0            1.0000        0.0000      1
+krb05        none relative   -3.4375         -10.0           -0.001             krb0            1.0000        0.0000      1
+krb06        none relative   -4.21526875     -10.0           -0.001             krb0            1.0000        0.0000      1
+krb07        none relative   -3.7125         -10.0           -0.001             krb0            1.0000        0.0000      1
+krb10        none relative   -13.75          -10.0           -0.001             krb1            1.0000        0.0000      1
+krb11        none relative   -0.001375       -10.0           -0.001             krb1            1.0000        0.0000      1
+krb12        none relative   -2.87062875     -10.0           -0.001             krb1            1.0000        0.0000      1
+krb13       fixed relative   0               -10.0           0                  krb1            1.0000        0.0000      1
+krb14       fixed relative   0               -10.0           0                  krb1            1.0000        0.0000      1
+krb15       fixed relative   0               -10.0           0                  krb1            1.0000        0.0000      1
+krb16       fixed relative   0               -10.0           0                  krb1            1.0000        0.0000      1
+krb17       fixed relative   0               -10.0           0                  krb1            1.0000        0.0000      1
+krb20        none relative   -2.40625        -10.0           -0.001             krb2            1.0000        0.0000      1
+krb21        none relative   -2.145          -10.0           -0.001             krb2            1.0000        0.0000      1
+krb22        none relative   -1.44375        -10.0           -0.001             krb2            1.0000        0.0000      1
+krb23        none relative   -2.8875         -10.0           -0.001             krb2            1.0000        0.0000      1
+krb24        none relative   -2.8875         -10.0           -0.001             krb2            1.0000        0.0000      1
+krb25       fixed relative   0               -10.0           0                  krb2            1.0000        0.0000      1
+krb26       fixed relative   0               -10.0           0                  krb2            1.0000        0.0000      1
+krb27       fixed relative   0               -10.0           0                  krb2            1.0000        0.0000      1
+frg0        fixed relative          0.2       0.00000001    1000               frg             1.0000        0.0000      1
+frg1        fixed relative          0.2       0.00000001    1000               frg             1.0000        0.0000      1
+frg2        fixed relative          0.2       0.00000001    1000               frg             1.0000        0.0000      1
+frg3        fixed relative          0.3       0.00000001    1000               frg             1.0000        0.0000      1
+frg4        fixed relative          0.2       0.00000001    1000               frg             1.0000        0.0000      1
+frg5        fixed relative          0.1       0.00000001    1000               frg             1.0000        0.0000      1
+frg6        fixed relative          0.2       0.00000001    1000               frg             1.0000        0.0000      1
+frg7        fixed relative          0.2       0.00000001    1000               frg             1.0000        0.0000      1
+micbnup      none relative      7.91729       0.00000001    1000               micbnup         1.0000        0.0000      1
+kdcmoss      none relative   0.00899999       0.000001      0.9                kdcmoss         1.0000        0.0000      1
+kdcrawc      none relative    0.0689655       0.000001      0.9                kdcrawc         1.0000        0.0000      1
+kdcsoma      none relative   0.00969988       0.000001      0.9                kdcsoma         1.0000        0.0000      1
+kdcsompr     none relative   0.00100001       0.000001      0.9                kdcsompr        1.0000        0.0000      1
+kdcsomcr     none relative        8e-05       0.00000001    0.9                kdcsomcr        1.0000        0.0000      1
+* observation groups
+soilc
+soiln
+nppa
+tnup
+vcl
+vcs
+vcr
+vsnl
+vsns
+vsnr
+* observation data
+ mdc                     178.000     8.2168020E-02        soilc
+ cshall                  3079.00     3.1124250E-03        soilc
+ cdeep                   7703.00     3.1124250E-03        soilc
+ cminsum                 43404.0     7.0963290E-05        soilc
+ onsum                   2206.00     4.4217600E-02        soiln
+ ansum                   8.95800          1.326528        soiln
+ nppa0                  0.541000          1.366200         nppa
+ tnup0                  6.000000E-03          41.16000         tnup
+ vcl0                    4.14000         0.1060200          vcl
+ vcs0                    69.7800     9.9495000E-02          vcs
+ vcr0                    4.54000     9.3895000E-02          vcr
+ vsnl0                  0.130000          3.084600         vsnl
+ vsns0                   1.13000          6.118200         vsns
+ vsnr0                   1.02000          1.911937         vsnr
+ nppa1                   10.0900          1.366200         nppa
+ tnup1                  8.900000E-02          41.16000         tnup
+ vcl1                    15.0100         0.1060200          vcl
+ vcs1                    30.4200     9.9495000E-02          vcs
+ vcr1                    5.41000     9.3895000E-02          vcr
+ vsnl1                  0.470000          3.084600         vsnl
+ vsns1                  0.490000          6.118200         vsns
+ vsnr1                   1.21000          1.911937         vsnr
+ nppa2                   8.68700          1.366200         nppa
+ tnup2                  0.117000          41.16000         tnup
+ vcl2                    74.6100         0.1060200          vcl
+ vcs2                    127.740     9.9495000E-02          vcs
+ vcr2                    11.8400     9.3895000E-02          vcr
+ vsnl2                   1.58000          3.084600         vsnl
+ vsns2                   2.06000          6.118200         vsns
+ vsnr2                   1.77000          1.911937         vsnr
+ nppa3                   28.3600          1.366200         nppa
+ tnup3                  0.636000          41.16000         tnup
+ vcl3                    105.250         0.1060200          vcl
+ vcs3                    0.00000          0.000000          vcs
+ vcr3                    166.510     9.3895000E-02          vcr
+ vsnl3                   4.72000          3.084600         vsnl
+ vsns3                   0.00000          0.000000         vsns
+ vsnr3                   7.48000          1.911937         vsnr
+ nppa4                   7.91200          1.366200         nppa
+ tnup4                  0.155000          41.16000         tnup
+ vcl4                   0.850000         0.1060200          vcl
+ vcs4                    0.00000          0.000000          vcs
+ vcr4                    11.7100     9.3895000E-02          vcr
+ vsnl4                  3.000000E-02          3.084600         vsnl
+ vsns4                   0.00000          0.000000         vsns
+ vsnr4                   1.81000          1.911937         vsnr
+ nppa5                   9.26200          1.366200         nppa
+ tnup5                  1.000000E-02          41.16000         tnup
+ vcl5                    42.7000         0.1060200          vcl
+ vcs5                    0.00000          0.000000          vcs
+ vcr5                    0.00000          0.000000          vcr
+ vsnl5                  0.690000          3.084600         vsnl
+ vsns5                   0.00000          0.000000         vsns
+ vsnr5                   0.00000          0.000000         vsnr
+ nppa6                   6.61000          1.366200         nppa
+ tnup6                  6.600000E-02          41.16000         tnup
+ vcl6                    37.2200         0.1060200          vcl
+ vcs6                    0.00000          0.000000          vcs
+ vcr6                    0.00000          0.000000          vcr
+ vsnl6                  0.560000          3.084600         vsnl
+ vsns6                   0.00000          0.000000         vsns
+ vsnr6                   0.00000          0.000000         vsnr
+ nppa7                   5.94100          1.366200         nppa
+ tnup7                  5.100000E-02          41.16000         tnup
+ vcl7                    86.8400         0.1060200          vcl
+ vcs7                    0.00000          0.000000          vcs
+ vcr7                    0.00000          0.000000          vcr
+ vsnl7                   1.49000          3.084600         vsnl
+ vsns7                   0.00000          0.000000         vsns
+ vsnr7                   0.00000          0.000000         vsnr
+* model command line
+./dvmdostem-pest-wrapper.sh
+* model input/output
+cmt_calparbgc.tpl parameters/cmt_calparbgc.txt
+read-simple-outputs.ins  simplified-outputs.txt
+* prior information
