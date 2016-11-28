@@ -86,15 +86,15 @@
 #SBATCH -t 1-13:00:00       # 1 day and 13 hours
 #SBATCH --partition main    # The partition 
 #SBATCH -J pestpp-cal       # sensible name for the job
-#SBATCH -w atlas13,atlas14,atlas15
-MASTERNODE="atlas13"
+#SBATCH -w atlas11,atlas14,atlas15
+MASTERNODE="atlas11"
 NWORKERS=73
 WORKING_ROOT="/atlas_scratch/$USER"
 
 # Deal with the master process
 echo "Starting master process..."
 cd $WORKING_ROOT/master-00000 
-srun --partition main --nodelist="atlas13" -n 1 pestpp tussock_full.pst /H :5050 > $WORKING_ROOT/master-00000.log 2>&1 &
+srun --partition main --nodelist="$MASTERNODE" -n 1 pestpp tussock_full.pst /H :5050 > $WORKING_ROOT/master-00000.log 2>&1 &
 echo "The srun exit status was: $?"
 echo "Created the master process..."
 
@@ -110,7 +110,7 @@ for (( i=1; i<=$NWORKERS; ++i ))
 do
   printf -v ZPNUM "%05d" $i # Zero padded number...
   cd $WORKING_ROOT/wrkr-$ZPNUM &&
-  srun -n 1 --partition main pestpp tussock_full.pst /H atlas13:5050 > $WORKING_ROOT/wrkr-$ZPNUM.log 2>&1 &
+  srun -n 1 --partition main pestpp tussock_full.pst /H $MASTERNODE:5050 > $WORKING_ROOT/wrkr-$ZPNUM.log 2>&1 &
   echo "Started worker number $ZPNUM..."
 done
 
