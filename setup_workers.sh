@@ -11,7 +11,7 @@ WORKING_ROOT="/atlas_scratch/$USER"
 usage () {
   echo "Usage:
 
-    ./setup_workers.sh [ -h | --help | --cleanup | NWORKERS ]
+    ./setup_workers.sh [ -h | --help | --cleanup | N EXPERIMENT_CASE ]
 
        -h, --help  Show this message and quit.
        --list      Show info about any existing worker and master directories
@@ -27,16 +27,20 @@ usage () {
                    NOTE: For use on computers that don's have SLURM; if your computer 
                    uses SLRUM, then submit via sbatch!
 
-       NWORKERS     Program will create N directories starting with
-                     '$WORKING_ROOT/master-00000' and 
+       N EXPERIMENT_CASE
+                   The program will create N directories for EXPERIMENT_CASE and
+                   will copy files from the main dvm-dos-tem directory and the
+                   EXPERIMENT_CASE directory into the master and worker directories.
+                   The directories will start with:
+                     '$WORKING_ROOT/master-00000' and
                      '$WORKING_ROOT/wrkr-00001'
+
   "
 }
 
-list_workers() {
+list_workers () {
   find $WORKING_ROOT -type d -name "master-*"
   find $WORKING_ROOT -type d -name "wrkr-*"
-
 }
 
 cleanup () {
@@ -71,8 +75,17 @@ cleanup () {
 setup_workers() {
 
   NWORKERS=$1
+  EXPERIMENT_CASE=${2%/} # <-- strips trailing slash, apparently posix compliant
 
-  # Check that the argument supplied can be converted to an integer...
+  # Check that user supplied enough args
+  if [[ "$#" -ne 2 ]]
+  then
+    usage
+    echo "ERROR: You must supply 2 args (number of directories, and experiment case directory)!"
+    exit -1
+  fi
+
+  # Check that the 1st argument supplied can be converted to an integer...
   python -c "int($NWORKERS)" > /dev/null 2>&1
   if [[ $? -ne 0 ]]
   then
@@ -81,12 +94,20 @@ setup_workers() {
     exit -1
   fi
 
-  #   echo "Will attempt to create directory structure for $NWORKERS workers and one master..."
-  #   if [[ $NWORKERS -gt 25 ]]
-  #   then
-  #     echo "I refuse. Thats too many directories to create!"
-  #     exit -1
-  #   fi
+  # Check that the 2nd argument supplied is a valid directory
+  if [[ ! -d "$2" ]]
+  then
+    usage
+    echo "ERROR: $2 is not a valid directory for your 'experiment case'!"
+    exit -1
+  fi
+
+  echo "Will attempt to create directory structure for $NWORKERS workers and one master..."
+  if [[ $NWORKERS -gt 99999 ]]
+  then
+    echo "Can't create more than 99999 directories without changing the naming pattern."
+    exit -1
+  fi
 
   for (( i=0; i <= $NWORKERS; ++i ))
   do
@@ -97,20 +118,24 @@ setup_workers() {
     mkdir -p $FULL_SPATH/config && cp -r $WORKING_ROOT/dvm-dos-tem/config $FULL_SPATH/
     mkdir -p $FULL_SPATH/parameters && cp -r $WORKING_ROOT/dvm-dos-tem/parameters $FULL_SPATH/
     mkdir -p $FULL_SPATH/output
-    cp $WORKING_ROOT/dvm-dos-tem/DATA/Toolik_10x10_allyrs/output/* $FULL_SPATH/output
-    cp $WORKING_ROOT/pestdemo/tussock_full/tussock_full.pst $FULL_SPATH
-    cp $WORKING_ROOT/pestdemo/tussock_full/cmt_calparbgc.tpl $FULL_SPATH
-    cp $WORKING_ROOT/pestdemo/tussock_full/dvmdostem-pest-wrapper.sh $FULL_SPATH
-    cp $WORKING_ROOT/pestdemo/tussock_full/read-simple-outputs.ins $FULL_SPATH
-    cp $WORKING_ROOT/pestdemo/tussock_full/pest-helper.py $FULL_SPATH
+    #cp $WORKING_ROOT/dvm-dos-tem/DATA/Toolik_10x10_allyrs/output/* $FULL_SPATH/output
+    cp $WORKING_ROOT/pestdemo/$EXPERIMENT_CASE/$EXPERIMENT_CASE.pst $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/$EXPERIMENT_CASE/cmt_calparbgc.tpl $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/$EXPERIMENT_CASE/dvmdostem-pest-wrapper.sh $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/$EXPERIMENT_CASE/read-simple-outputs.ins $FULL_SPATH
+    cp $WORKING_ROOT/pestdemo/pest-helper.py $FULL_SPATH
 
   done
 
+  echo "Rename worker-00000 to master-00000"
   mv "$WORKING_ROOT/wrkr-00000" "$WORKING_ROOT/master-00000"
 }
 
 start_workers() {
-
+  echo "WARNING WARNING WARNING!!!!"
+  echo "This functionlaity likely needs refactoring to accomodate the change to keeping"
+  echo "the pest-helper.py and other scripts at the root of the pestdemo repo!!"
+  echo ""
   find $WORKING_ROOT -type d -name "master-*" -print0 | while IFS= read -r -d '' master_dir
   do
     echo "$master_dir"
@@ -137,7 +162,7 @@ start_workers() {
 
 NWORKERS=
 # Check that user supplied exactly one argument
-if [[ "$#" -ne 1 ]]
+if [[ "$#" -lt 1 ]]
 then
   usage
   exit -1
@@ -162,7 +187,8 @@ case $1 in
                     ;;
 
   *)                NWORKERS=$1
-                    setup_workers $NWORKERS
+                    EXPERIMENT=$2
+                    setup_workers $NWORKERS $EXPERIMENT
                     ;;
 esac
 
