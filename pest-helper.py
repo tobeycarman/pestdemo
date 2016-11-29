@@ -6,6 +6,78 @@ import textwrap
 import argparse
 import os        # for removing temporary file
 import shutil    # for making temp copy of calibration targets to be imported
+import collections # for OrderedDict
+
+
+# Map the short names that we need to use with PEST to the longer
+# selection of keys that are used in the calibration_targets, configured_suites
+# and dvmdostem json files.
+# NOTES ON CONSTRUCTING:
+#   A basic initialization of an OrderedDict doesn't work as expected, because 
+#   defining a dict in-line does not preserve the initial order. So we have to
+#   initialize it with a list of tuples. Gets messy for the nested aspect...
+
+# First mapping. Works for targets2obs conversion, cause Nuptake is used in
+# the targets file.
+MAPPING1 = collections.OrderedDict(
+  [
+    ('mdc'     ,  'MossDeathC'),
+    ('cshall'  ,  'CarbonShallow'),
+    ('cdeep'   ,  'CarbonDeep'),
+    ('cminsum' ,  'CarbonMineralSum'),
+    ('onsum'   ,  'OrganicNitrogenSum'),
+    ('ansum'   ,  'AvailableNitrogenSum' ),
+
+    ('pftvars', collections.OrderedDict(
+        [
+          ('nppa'     , ['NPPAll']),
+          ('tnup'     , ['Nuptake']),
+          ('vcl'      , ['VegCarbon', 'Leaf']),
+          ('vcs'      , ['VegCarbon', 'Stem']),
+          ('vcr'      , ['VegCarbon', 'Root']),
+          ('vsnl'     , ['VegStructuralNitrogen', 'Leaf']),
+          ('vsns'     , ['VegStructuralNitrogen', 'Stem']),
+          ('vsnr'     , ['VegStructuralNitrogen', 'Root']),
+        ]
+      )
+    )
+  ]
+)
+
+# Seem to need this one (which is basically the same as the other mapping)
+# because of TotNitrogenUptake...can't decide if I should refactor this to
+# Nuptake (or vice versa).
+MAPPING2 = collections.OrderedDict(
+  [
+    ('mdc'     ,  'MossDeathC'),
+    ('cshall'  ,  'CarbonShallow'),
+    ('cdeep'   ,  'CarbonDeep'),
+    ('cminsum' ,  'CarbonMineralSum'),
+    ('onsum'   ,  'OrganicNitrogenSum'),
+    ('ansum'   ,  'AvailableNitrogenSum' ),
+
+    ('pftvars', collections.OrderedDict(
+        [
+          ('nppa'     , ['NPPAll']),
+          ('tnup'     , ['TotNitrogenUptake']),
+          ('vcl'      , ['VegCarbon', 'Leaf']),
+          ('vcs'      , ['VegCarbon', 'Stem']),
+          ('vcr'      , ['VegCarbon', 'Root']),
+          ('vsnl'     , ['VegStructuralNitrogen', 'Leaf']),
+          ('vsns'     , ['VegStructuralNitrogen', 'Stem']),
+          ('vsnr'     , ['VegStructuralNitrogen', 'Root']),
+        ]
+      )
+    )
+  ]
+)
+
+# Given a list of keys, this function will return the item found in a nested
+# dict by following the keys in the list.
+def recursive_get(d, keys):
+  if len(keys) == 1:
+    return d[keys[0]]
+  return recursive_get(d[keys[0]], keys[1:])
 
 
 def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
