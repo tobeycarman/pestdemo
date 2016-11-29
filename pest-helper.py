@@ -152,25 +152,18 @@ def build_ins(outfile):
   print "Writing instruction file to: %s" % (outfile)
   print "DOUBLE CHECK! --> instruction file must match simplified outputs!"
   with open(outfile, 'w') as f:
+
     f.write("pif @\n")
-    f.write("l1 @,@ !mdc!\n")
-    f.write("l1 @,@ !cshall!\n")
-    f.write("l1 @,@ !cdeep!\n")
-    f.write("l1 @,@ !cminsum!\n")
-    f.write("l1 @,@ !onsum!\n")
-    f.write("l1 @,@ !ansum!\n")
-    
-    for i in range(0, NUMPFTS):
-      #f.write("l1 @,@ !gppain%s!\n" % (i))
-      #f.write("l1 @,@ !nppain%s!\n" % (i))
-      f.write("l1 @,@ !nppa%s!\n" % (i))
-      f.write("l1 @,@ !tnup%s!\n" % (i))
-      f.write("l1 @,@ !vcl%s!\n" % (i))
-      f.write("l1 @,@ !vcs%s!\n" % (i))
-      f.write("l1 @,@ !vcr%s!\n" % (i))
-      f.write("l1 @,@ !vsnl%s!\n" % (i))
-      f.write("l1 @,@ !vsns%s!\n" % (i))
-      f.write("l1 @,@ !vsnr%s!\n" % (i))
+
+    for key, value in MAPPING1.items():
+      if key != 'pftvars':
+        f.write("l1 @,@ !{0:}!\n".format(key))
+      else:
+        pass
+
+    for key, value in MAPPING2['pftvars'].items():
+      for i in range(0, NUMPFTS):
+        f.write('l1 @,@ !{0:}{1:}!\n'.format(key, i))
 
   # This seems a bit of a hack, but we need to 
   # replace the seconds line of the file with a l2 instead of l1
