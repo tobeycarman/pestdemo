@@ -132,27 +132,18 @@ def dvmdostemjson2pestobs(outfile, data_root='/tmp/dvmdostem'):
   with open(outfile, 'w') as f:
     f.write("Variable,Value\n")
 
-    # Non pft stuff
-    f.write('mdc,%s\n' % (fdata['MossdeathCarbon'])) # is MossDeathC in calibration_targets.py
-    f.write('cshall,%s\n' % (fdata['CarbonShallow']))
-    f.write('cdeep,%s\n' % (fdata['CarbonDeep']))
-    f.write('cminsum,%s\n' % (fdata['CarbonMineralSum']))
-    f.write('onsum,%s\n' % (fdata['OrganicNitrogenSum']))
-    f.write('ansum,%s\n' % (fdata['AvailableNitrogenSum']))
+    for key, value in MAPPING2.items():
+      if key != 'pftvars':
+        f.write('{0:},{1:}\n'.format(key, fdata[value]))
+      else:
+        pass
 
-    # pft stuff
-    for i in range(0, NUMPFTS):
-      pftkey = 'PFT%i' % (i)
-      #f.write('gppain%s,%s\n' % (i, fdata[pftkey]['GPPAllIgnoringNitrogen']))
-      #f.write('nppain%s,%s\n' % (i, fdata[pftkey]['NPPAllIgnoringNitrogen']))
-      f.write('nppa%s,%s\n' % (i, fdata[pftkey]['NPPAll']))
-      f.write('tnup%s,%s\n' % (i, fdata[pftkey]['TotNitrogenUptake'])) # is Nuptake in calibration_targets.py
-      f.write('vcl%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf']))
-      f.write('vcs%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Stem']))
-      f.write('vcr%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Root']))
-      f.write('vsnl%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Leaf']))
-      f.write('vsns%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Stem']))
-      f.write('vsnr%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Root']))
+    for key, value in MAPPING2['pftvars'].items():
+      for i in range(0, NUMPFTS):
+        pftkey = 'PFT%s' % i
+        key_list = value[:]
+        key_list.insert(0, pftkey)
+        f.write('{0:}{1:},{2:}\n'.format(key, i, recursive_get(fdata, key_list)))
 
 
 def build_ins(outfile):
