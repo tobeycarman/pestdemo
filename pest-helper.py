@@ -102,8 +102,8 @@ def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
           else:
             pass
 
-        for key, value in MAPPING1['pftvars'].items():
-          for i in range(0, NUMPFTS):
+        for i in range(0, NUMPFTS):
+          for key, value in MAPPING1['pftvars'].items():
             key_list = value[:]
             key_list.append(i)
             f.write('{0:}{1:<10} {2:>20}\n'.format(key, i, recursive_get(data, key_list)))
@@ -138,8 +138,8 @@ def dvmdostemjson2pestobs(outfile, data_root='/tmp/dvmdostem'):
       else:
         pass
 
-    for key, value in MAPPING2['pftvars'].items():
-      for i in range(0, NUMPFTS):
+    for i in range(0, NUMPFTS):
+      for key, value in MAPPING2['pftvars'].items():
         pftkey = 'PFT%s' % i
         key_list = value[:]
         key_list.insert(0, pftkey)
@@ -161,8 +161,8 @@ def build_ins(outfile):
       else:
         pass
 
-    for key, value in MAPPING2['pftvars'].items():
-      for i in range(0, NUMPFTS):
+    for i in range(0, NUMPFTS):
+      for key, value in MAPPING2['pftvars'].items():
         f.write('l1 @,@ !{0:}{1:}!\n'.format(key, i))
 
   # This seems a bit of a hack, but we need to 
