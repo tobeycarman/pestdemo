@@ -234,7 +234,7 @@ if __name__ == '__main__':
     build_ins(args.build_ins[0])
 
   if args.targets2obs:
-    caltargetvalues2pestobsvalues("../../dvm-dos-tem/calibration/calibration_targets.py", args.targets2obs[0], 5)
+    caltargetvalues2pestobsvalues("../dvm-dos-tem/calibration/calibration_targets.py", args.targets2obs[0], 5)
 
 # ./pest-helper.py --json2obs 
 # ./pest-helper.py --build-ins path/to/??
