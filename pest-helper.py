@@ -96,30 +96,20 @@ def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
       NUMPFTS = 8
 
       with open(outobsfile, 'w') as f:
+        for key, value in MAPPING1.items():
+          if key != 'pftvars':
+            f.write('{0:<10} {1:>20}\n'.format(key, data[value]))
+          else:
+            pass
 
-        # Non pft stuff
-        f.write('{0:<10} {1:>20}\n'.format('mdc', data['MossDeathC'])) # is MossdeathCarbon in calibration json files
-        f.write('{0:<10} {1:>20}\n'.format('cshall', data['CarbonShallow'])) 
-        f.write('{0:<10} {1:>20}\n'.format('cdeep', data['CarbonDeep']))
-        f.write('{0:<10} {1:>20}\n'.format('cminsum', data['CarbonMineralSum']))
-        f.write('{0:<10} {1:>20}\n'.format('onsum', data['OrganicNitrogenSum']))
-        f.write('{0:<10} {1:>20}\n'.format('ansum', data['AvailableNitrogenSum']))
-
-        # pft stuff
-        for i in range(0, NUMPFTS):
-          #f.write('gppain{0:<10} {1:>20}\n'.format(i, data['GPPAllIgnoringNitrogen'][i])) 
-          #f.write('nppain{0:<10} {1:>20}\n'.format(i, data['NPPAllIgnoringNitrogen'][i]))
-          f.write('nppa{0:<10} {1:>20}\n'.format(i, data['NPPAll'][i]))
-          f.write('tnup{0:<10} {1:>20}\n'.format(i, data['Nuptake'][i]))
-          f.write('vcl{0:<10} {1:>20}\n'.format(i, data['VegCarbon']['Leaf'][i]))
-          f.write('vcs{0:<10} {1:>20}\n'.format(i, data['VegCarbon']['Stem'][i]))
-          f.write('vcr{0:<10} {1:>20}\n'.format(i, data['VegCarbon']['Root'][i]))
-          f.write('vsnl{0:<10} {1:>20}\n'.format(i, data['VegStructuralNitrogen']['Leaf'][i]))
-          f.write('vsns{0:<10} {1:>20}\n'.format(i, data['VegStructuralNitrogen']['Stem'][i]))
-          f.write('vsnr{0:<10} {1:>20}\n'.format(i, data['VegStructuralNitrogen']['Root'][i]))
+        for key, value in MAPPING1['pftvars'].items():
+          for i in range(0, NUMPFTS):
+            key_list = value[:]
+            key_list.append(i)
+            f.write('{0:}{1:<10} {2:>20}\n'.format(key, i, recursive_get(data, key_list)))
 
     else:
-      pass
+      pass # wrong CMT number
 
   os.remove("calibration_targets.py")
   os.remove("calibration_targets.pyc")
