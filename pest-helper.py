@@ -8,6 +8,7 @@ import os        # for removing temporary file
 import shutil    # for making temp copy of calibration targets to be imported
 import collections # for OrderedDict
 
+NUMPFTS = 9
 
 # Map the short names that we need to use with PEST to the longer
 # selection of keys that are used in the calibration_targets, configured_suites
@@ -93,8 +94,6 @@ def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
   for cmtname, data in calibration_targets.calibration_targets.iteritems():
     if data['cmtnumber'] == int(cmtnum):
 
-      NUMPFTS = 8
-
       with open(outobsfile, 'w') as f:
         for key, value in MAPPING1.items():
           if key != 'pftvars':
@@ -118,7 +117,6 @@ def dvmdostemjson2pestobs(outfile, data_root='/tmp/dvmdostem'):
 
   path = os.path.join(data_root, 'calibration/yearly/')
 
-  NUMPFTS = 8
   files = sorted( glob.glob('%s/*.json' % path) )
   print "Found %s files." % (len(files)) 
 
@@ -148,7 +146,6 @@ def dvmdostemjson2pestobs(outfile, data_root='/tmp/dvmdostem'):
 
 def build_ins(outfile):
 
-  NUMPFTS = 8
   print "Writing instruction file to: %s" % (outfile)
   print "DOUBLE CHECK! --> instruction file must match simplified outputs!"
   with open(outfile, 'w') as f:
