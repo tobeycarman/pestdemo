@@ -6,6 +6,78 @@ import textwrap
 import argparse
 import os        # for removing temporary file
 import shutil    # for making temp copy of calibration targets to be imported
+import collections # for OrderedDict
+
+
+# Map the short names that we need to use with PEST to the longer
+# selection of keys that are used in the calibration_targets, configured_suites
+# and dvmdostem json files.
+# NOTES ON CONSTRUCTING:
+#   A basic initialization of an OrderedDict doesn't work as expected, because 
+#   defining a dict in-line does not preserve the initial order. So we have to
+#   initialize it with a list of tuples. Gets messy for the nested aspect...
+
+# First mapping. Works for targets2obs conversion, cause Nuptake is used in
+# the targets file.
+MAPPING1 = collections.OrderedDict(
+  [
+    ('mdc'     ,  'MossDeathC'),
+    ('cshall'  ,  'CarbonShallow'),
+    ('cdeep'   ,  'CarbonDeep'),
+    ('cminsum' ,  'CarbonMineralSum'),
+    ('onsum'   ,  'OrganicNitrogenSum'),
+    ('ansum'   ,  'AvailableNitrogenSum' ),
+
+    ('pftvars', collections.OrderedDict(
+        [
+          ('nppa'     , ['NPPAll']),
+          ('tnup'     , ['Nuptake']),
+          ('vcl'      , ['VegCarbon', 'Leaf']),
+          ('vcs'      , ['VegCarbon', 'Stem']),
+          ('vcr'      , ['VegCarbon', 'Root']),
+          ('vsnl'     , ['VegStructuralNitrogen', 'Leaf']),
+          ('vsns'     , ['VegStructuralNitrogen', 'Stem']),
+          ('vsnr'     , ['VegStructuralNitrogen', 'Root']),
+        ]
+      )
+    )
+  ]
+)
+
+# Seem to need this one (which is basically the same as the other mapping)
+# because of TotNitrogenUptake...can't decide if I should refactor this to
+# Nuptake (or vice versa).
+MAPPING2 = collections.OrderedDict(
+  [
+    ('mdc'     ,  'MossDeathC'),
+    ('cshall'  ,  'CarbonShallow'),
+    ('cdeep'   ,  'CarbonDeep'),
+    ('cminsum' ,  'CarbonMineralSum'),
+    ('onsum'   ,  'OrganicNitrogenSum'),
+    ('ansum'   ,  'AvailableNitrogenSum' ),
+
+    ('pftvars', collections.OrderedDict(
+        [
+          ('nppa'     , ['NPPAll']),
+          ('tnup'     , ['TotNitrogenUptake']),
+          ('vcl'      , ['VegCarbon', 'Leaf']),
+          ('vcs'      , ['VegCarbon', 'Stem']),
+          ('vcr'      , ['VegCarbon', 'Root']),
+          ('vsnl'     , ['VegStructuralNitrogen', 'Leaf']),
+          ('vsns'     , ['VegStructuralNitrogen', 'Stem']),
+          ('vsnr'     , ['VegStructuralNitrogen', 'Root']),
+        ]
+      )
+    )
+  ]
+)
+
+# Given a list of keys, this function will return the item found in a nested
+# dict by following the keys in the list.
+def recursive_get(d, keys):
+  if len(keys) == 1:
+    return d[keys[0]]
+  return recursive_get(d[keys[0]], keys[1:])
 
 
 def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
@@ -24,30 +96,20 @@ def caltargetvalues2pestobsvalues(caltargetsfile, outobsfile, cmtnum):
       NUMPFTS = 8
 
       with open(outobsfile, 'w') as f:
+        for key, value in MAPPING1.items():
+          if key != 'pftvars':
+            f.write('{0:<10} {1:>20}\n'.format(key, data[value]))
+          else:
+            pass
 
-        # Non pft stuff
-        f.write('{0:<10} {1:>20}\n'.format('mdc', data['MossDeathC'])) # is MossdeathCarbon in calibration json files
-        f.write('{0:<10} {1:>20}\n'.format('cshall', data['CarbonShallow'])) 
-        f.write('{0:<10} {1:>20}\n'.format('cdeep', data['CarbonDeep']))
-        f.write('{0:<10} {1:>20}\n'.format('cminsum', data['CarbonMineralSum']))
-        f.write('{0:<10} {1:>20}\n'.format('onsum', data['OrganicNitrogenSum']))
-        f.write('{0:<10} {1:>20}\n'.format('ansum', data['AvailableNitrogenSum']))
-
-        # pft stuff
         for i in range(0, NUMPFTS):
-          #f.write('gppain{0:<10} {1:>20}\n'.format(i, data['GPPAllIgnoringNitrogen'][i])) 
-          #f.write('nppain{0:<10} {1:>20}\n'.format(i, data['NPPAllIgnoringNitrogen'][i]))
-          f.write('nppa{0:<10} {1:>20}\n'.format(i, data['NPPAll'][i]))
-          f.write('tnup{0:<10} {1:>20}\n'.format(i, data['Nuptake'][i]))
-          f.write('vcl{0:<10} {1:>20}\n'.format(i, data['VegCarbon']['Leaf'][i]))
-          f.write('vcs{0:<10} {1:>20}\n'.format(i, data['VegCarbon']['Stem'][i]))
-          f.write('vcr{0:<10} {1:>20}\n'.format(i, data['VegCarbon']['Root'][i]))
-          f.write('vsnl{0:<10} {1:>20}\n'.format(i, data['VegStructuralNitrogen']['Leaf'][i]))
-          f.write('vsns{0:<10} {1:>20}\n'.format(i, data['VegStructuralNitrogen']['Stem'][i]))
-          f.write('vsnr{0:<10} {1:>20}\n'.format(i, data['VegStructuralNitrogen']['Root'][i]))
+          for key, value in MAPPING1['pftvars'].items():
+            key_list = value[:]
+            key_list.append(i)
+            f.write('{0:}{1:<10} {2:>20}\n'.format(key, i, recursive_get(data, key_list)))
 
     else:
-      pass
+      pass # wrong CMT number
 
   os.remove("calibration_targets.py")
   os.remove("calibration_targets.pyc")
@@ -70,27 +132,18 @@ def dvmdostemjson2pestobs(outfile, data_root='/tmp/dvmdostem'):
   with open(outfile, 'w') as f:
     f.write("Variable,Value\n")
 
-    # Non pft stuff
-    f.write('mdc,%s\n' % (fdata['MossdeathCarbon'])) # is MossDeathC in calibration_targets.py
-    f.write('cshall,%s\n' % (fdata['CarbonShallow']))
-    f.write('cdeep,%s\n' % (fdata['CarbonDeep']))
-    f.write('cminsum,%s\n' % (fdata['CarbonMineralSum']))
-    f.write('onsum,%s\n' % (fdata['OrganicNitrogenSum']))
-    f.write('ansum,%s\n' % (fdata['AvailableNitrogenSum']))
+    for key, value in MAPPING2.items():
+      if key != 'pftvars':
+        f.write('{0:},{1:}\n'.format(key, fdata[value]))
+      else:
+        pass
 
-    # pft stuff
     for i in range(0, NUMPFTS):
-      pftkey = 'PFT%i' % (i)
-      #f.write('gppain%s,%s\n' % (i, fdata[pftkey]['GPPAllIgnoringNitrogen']))
-      #f.write('nppain%s,%s\n' % (i, fdata[pftkey]['NPPAllIgnoringNitrogen']))
-      f.write('nppa%s,%s\n' % (i, fdata[pftkey]['NPPAll']))
-      f.write('tnup%s,%s\n' % (i, fdata[pftkey]['TotNitrogenUptake'])) # is Nuptake in calibration_targets.py
-      f.write('vcl%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Leaf']))
-      f.write('vcs%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Stem']))
-      f.write('vcr%s,%s\n' % (i, fdata[pftkey]['VegCarbon']['Root']))
-      f.write('vsnl%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Leaf']))
-      f.write('vsns%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Stem']))
-      f.write('vsnr%s,%s\n' % (i, fdata[pftkey]['VegStructuralNitrogen']['Root']))
+      for key, value in MAPPING2['pftvars'].items():
+        pftkey = 'PFT%s' % i
+        key_list = value[:]
+        key_list.insert(0, pftkey)
+        f.write('{0:}{1:},{2:}\n'.format(key, i, recursive_get(fdata, key_list)))
 
 
 def build_ins(outfile):
@@ -99,25 +152,18 @@ def build_ins(outfile):
   print "Writing instruction file to: %s" % (outfile)
   print "DOUBLE CHECK! --> instruction file must match simplified outputs!"
   with open(outfile, 'w') as f:
+
     f.write("pif @\n")
-    f.write("l1 @,@ !mdc!\n")
-    f.write("l1 @,@ !cshall!\n")
-    f.write("l1 @,@ !cdeep!\n")
-    f.write("l1 @,@ !cminsum!\n")
-    f.write("l1 @,@ !onsum!\n")
-    f.write("l1 @,@ !ansum!\n")
-    
+
+    for key, value in MAPPING1.items():
+      if key != 'pftvars':
+        f.write("l1 @,@ !{0:}!\n".format(key))
+      else:
+        pass
+
     for i in range(0, NUMPFTS):
-      #f.write("l1 @,@ !gppain%s!\n" % (i))
-      #f.write("l1 @,@ !nppain%s!\n" % (i))
-      f.write("l1 @,@ !nppa%s!\n" % (i))
-      f.write("l1 @,@ !tnup%s!\n" % (i))
-      f.write("l1 @,@ !vcl%s!\n" % (i))
-      f.write("l1 @,@ !vcs%s!\n" % (i))
-      f.write("l1 @,@ !vcr%s!\n" % (i))
-      f.write("l1 @,@ !vsnl%s!\n" % (i))
-      f.write("l1 @,@ !vsns%s!\n" % (i))
-      f.write("l1 @,@ !vsnr%s!\n" % (i))
+      for key, value in MAPPING2['pftvars'].items():
+        f.write('l1 @,@ !{0:}{1:}!\n'.format(key, i))
 
   # This seems a bit of a hack, but we need to 
   # replace the seconds line of the file with a l2 instead of l1
@@ -188,7 +234,7 @@ if __name__ == '__main__':
     build_ins(args.build_ins[0])
 
   if args.targets2obs:
-    caltargetvalues2pestobsvalues("../../dvm-dos-tem/calibration/calibration_targets.py", args.targets2obs[0], 5)
+    caltargetvalues2pestobsvalues("../dvm-dos-tem/calibration/calibration_targets.py", args.targets2obs[0], 5)
 
 # ./pest-helper.py --json2obs 
 # ./pest-helper.py --build-ins path/to/??
