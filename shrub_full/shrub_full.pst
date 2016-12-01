@@ -338,8 +338,8 @@ vsnl8                   0.00000      1.0  obsgroup
 vsns8                   0.00000      1.0  obsgroup
 vsnr8                   0.00000      1.0  obsgroup
 * model command line
-model
+./dvmdostem-pest-wrapper.sh
 * model input/output
-model.tpl  model.inp
-model.ins  model.out
+cmt_calparbgc.tpl parameters/cmt_calparbgc.txt
+read-simple-outputs.ins  simplified-outputs.txt
 * prior information
