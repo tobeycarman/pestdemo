@@ -153,86 +153,95 @@ kdcsoma      none relative   1.580460E-02  -1.000000E+10   1.000000E+10 kdcsoma 
 kdcsompr     none relative   2.080500E-03  -1.000000E+10   1.000000E+10 kdcsompr        1.0000        0.0000      1
 kdcsomcr     none relative   1.080000E-05  -1.000000E+10   1.000000E+10 kdcsomcr        1.0000        0.0000      1
 * observation groups
-obsgroup
+soilc
+soiln
+nppa
+tnup
+vcl
+vcs
+vcr
+vsnl
+vsns
+vsnr
 * observation data
-mdc                     178.000      1.0  obsgroup
-cshall                  3079.00      1.0  obsgroup
-cdeep                   7703.00      1.0  obsgroup
-cminsum                 43404.0      1.0  obsgroup
-onsum                   2206.00      1.0  obsgroup
-ansum                   8.95800      1.0  obsgroup
-nppa0                   34.7100      1.0  obsgroup
-tnup0                  0.197000      1.0  obsgroup
-vcl0                    4.14000      1.0  obsgroup
-vcs0                    69.7800      1.0  obsgroup
-vcr0                    4.54000      1.0  obsgroup
-vsnl0                  0.130000      1.0  obsgroup
-vsns0                   1.13000      1.0  obsgroup
-vsnr0                   1.02000      1.0  obsgroup
-nppa1                   14.4700      1.0  obsgroup
-tnup1                  8.200000E-02  1.0  obsgroup
-vcl1                    15.0100      1.0  obsgroup
-vcs1                    30.4200      1.0  obsgroup
-vcr1                    5.41000      1.0  obsgroup
-vsnl1                  0.470000      1.0  obsgroup
-vsns1                  0.490000      1.0  obsgroup
-vsnr1                   1.21000      1.0  obsgroup
-nppa2                   55.7400      1.0  obsgroup
-tnup2                  0.418000      1.0  obsgroup
-vcl2                    74.6100      1.0  obsgroup
-vcs2                    127.740      1.0  obsgroup
-vcr2                    11.8400      1.0  obsgroup
-vsnl2                   1.58000      1.0  obsgroup
-vsns2                   2.06000      1.0  obsgroup
-vsnr2                   1.77000      1.0  obsgroup
-nppa3                   104.400      1.0  obsgroup
-tnup3                  0.731000      1.0  obsgroup
-vcl3                    105.250      1.0  obsgroup
-vcs3                    0.00000      1.0  obsgroup
-vcr3                    166.510      1.0  obsgroup
-vsnl3                   4.72000      1.0  obsgroup
-vsns3                   0.00000      1.0  obsgroup
-vsnr3                   7.48000      1.0  obsgroup
-nppa4                   1.87600      1.0  obsgroup
-tnup4                  9.000000E-03  1.0  obsgroup
-vcl4                   0.850000      1.0  obsgroup
-vcs4                    0.00000      1.0  obsgroup
-vcr4                    11.7100      1.0  obsgroup
-vsnl4                  3.000000E-02  1.0  obsgroup
-vsns4                   0.00000      1.0  obsgroup
-vsnr4                   1.81000      1.0  obsgroup
-nppa5                   68.2900      1.0  obsgroup
-tnup5                  7.400000E-02  1.0  obsgroup
-vcl5                    42.7000      1.0  obsgroup
-vcs5                    0.00000      1.0  obsgroup
-vcr5                    0.00000      1.0  obsgroup
-vsnl5                  0.690000      1.0  obsgroup
-vsns5                   0.00000      1.0  obsgroup
-vsnr5                   0.00000      1.0  obsgroup
-nppa6                   48.7000      1.0  obsgroup
-tnup6                  0.487000      1.0  obsgroup
-vcl6                    37.2200      1.0  obsgroup
-vcs6                    0.00000      1.0  obsgroup
-vcr6                    0.00000      1.0  obsgroup
-vsnl6                  0.560000      1.0  obsgroup
-vsns6                   0.00000      1.0  obsgroup
-vsnr6                   0.00000      1.0  obsgroup
-nppa7                   43.8100      1.0  obsgroup
-tnup7                  0.376000      1.0  obsgroup
-vcl7                    86.8400      1.0  obsgroup
-vcs7                    0.00000      1.0  obsgroup
-vcr7                    0.00000      1.0  obsgroup
-vsnl7                   1.49000      1.0  obsgroup
-vsns7                   0.00000      1.0  obsgroup
-vsnr7                   0.00000      1.0  obsgroup
-nppa8                   0.00000      1.0  obsgroup
-tnup8                   0.00000      1.0  obsgroup
-vcl8                    0.00000      1.0  obsgroup
-vcs8                    0.00000      1.0  obsgroup
-vcr8                    0.00000      1.0  obsgroup
-vsnl8                   0.00000      1.0  obsgroup
-vsns8                   0.00000      1.0  obsgroup
-vsnr8                   0.00000      1.0  obsgroup
+mdc                     178.000      1.0   soilc
+cshall                  3079.00      1.0   soilc
+cdeep                   7703.00      1.0   soilc
+cminsum                 43404.0      1.0   soilc
+onsum                   2206.00      1.0   soiln
+ansum                   8.95800      1.0   soiln
+nppa0                   34.7100      1.0    nppa
+tnup0                  0.197000      1.0    tnup
+vcl0                    4.14000      1.0     vcl
+vcs0                    69.7800      1.0     vcs
+vcr0                    4.54000      1.0     vcr
+vsnl0                  0.130000      1.0    vsnl
+vsns0                   1.13000      1.0    vsns
+vsnr0                   1.02000      1.0    vsnr
+nppa1                   14.4700      1.0    nppa
+tnup1                  8.200000E-02  1.0    tnup
+vcl1                    15.0100      1.0     vcl
+vcs1                    30.4200      1.0     vcs
+vcr1                    5.41000      1.0     vcr
+vsnl1                  0.470000      1.0    vsnl
+vsns1                  0.490000      1.0    vsns
+vsnr1                   1.21000      1.0    vsnr
+nppa2                   55.7400      1.0    nppa
+tnup2                  0.418000      1.0    tnup
+vcl2                    74.6100      1.0     vcl
+vcs2                    127.740      1.0     vcs
+vcr2                    11.8400      1.0     vcr
+vsnl2                   1.58000      1.0    vsnl
+vsns2                   2.06000      1.0    vsns
+vsnr2                   1.77000      1.0    vsnr
+nppa3                   104.400      1.0    nppa
+tnup3                  0.731000      1.0    tnup
+vcl3                    105.250      1.0     vcl
+vcs3                    0.00000      1.0     vcs
+vcr3                    166.510      1.0     vcr
+vsnl3                   4.72000      1.0    vsnl
+vsns3                   0.00000      1.0    vsns
+vsnr3                   7.48000      1.0    vsnr
+nppa4                   1.87600      1.0    nppa
+tnup4                  9.000000E-03  1.0    tnup
+vcl4                   0.850000      1.0     vcl
+vcs4                    0.00000      1.0     vcs
+vcr4                    11.7100      1.0     vcr
+vsnl4                  3.000000E-02  1.0    vsnl
+vsns4                   0.00000      1.0    vsns
+vsnr4                   1.81000      1.0    vsnr
+nppa5                   68.2900      1.0    nppa
+tnup5                  7.400000E-02  1.0    tnup
+vcl5                    42.7000      1.0     vcl
+vcs5                    0.00000      1.0     vcs
+vcr5                    0.00000      1.0     vcr
+vsnl5                  0.690000      1.0    vsnl
+vsns5                   0.00000      1.0    vsns
+vsnr5                   0.00000      1.0    vsnr
+nppa6                   48.7000      1.0    nppa
+tnup6                  0.487000      1.0    tnup
+vcl6                    37.2200      1.0     vcl
+vcs6                    0.00000      1.0     vcs
+vcr6                    0.00000      1.0     vcr
+vsnl6                  0.560000      1.0    vsnl
+vsns6                   0.00000      1.0    vsns
+vsnr6                   0.00000      1.0    vsnr
+nppa7                   43.8100      1.0    nppa
+tnup7                  0.376000      1.0    tnup
+vcl7                    86.8400      1.0     vcl
+vcs7                    0.00000      1.0     vcs
+vcr7                    0.00000      1.0     vcr
+vsnl7                   1.49000      1.0    vsnl
+vsns7                   0.00000      1.0    vsns
+vsnr7                   0.00000      1.0    vsnr
+nppa8                   0.00000      1.0    nppa
+tnup8                   0.00000      1.0    tnup
+vcl8                    0.00000      1.0     vcl
+vcs8                    0.00000      1.0     vcs
+vcr8                    0.00000      1.0     vcr
+vsnl8                   0.00000      1.0    vsnl
+vsns8                   0.00000      1.0    vsns
+vsnr8                   0.00000      1.0    vsnr
 * model command line
 ./dvmdostem-pest-wrapper.sh
 * model input/output
