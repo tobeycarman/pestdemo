@@ -23,7 +23,6 @@ krb1         relative 0.05  0.0  switch  2.0 parabolic
 krb2         relative 0.05  0.0  switch  2.0 parabolic
 frg          relative 0.05  0.0  switch  2.0 parabolic
 micbnup      relative 0.05  0.0  switch  2.0 parabolic
-kdcmoss      relative 0.05  0.0  switch  2.0 parabolic
 kdcrawc      relative 0.05  0.0  switch  2.0 parabolic
 kdcsoma      relative 0.05  0.0  switch  2.0 parabolic
 kdcsompr     relative 0.05  0.0  switch  2.0 parabolic
@@ -147,7 +146,6 @@ frg6         none relative   0.200000      -1.000000E+10   1.000000E+10 frg     
 frg7         none relative   0.200000      -1.000000E+10   1.000000E+10 frg            1.0000        0.0000      1
 frg8         none relative   0.200000      -1.000000E+10   1.000000E+10 frg            1.0000        0.0000      1
 micbnup      none relative    2.65253      -1.000000E+10   1.000000E+10 micbnup         1.0000        0.0000      1
-kdcmoss      none relative   5.704200E-03  -1.000000E+10   1.000000E+10 kdcmoss         1.0000        0.0000      1
 kdcrawc      none relative   9.070420E-02  -1.000000E+10   1.000000E+10 kdcrawc         1.0000        0.0000      1
 kdcsoma      none relative   1.580460E-02  -1.000000E+10   1.000000E+10 kdcsoma         1.0000        0.0000      1
 kdcsompr     none relative   2.080500E-03  -1.000000E+10   1.000000E+10 kdcsompr        1.0000        0.0000      1

@@ -17,7 +17,6 @@ ptf %
 0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.0          // frg: fraction of available NPP (GPP after rm) for growth resp. 
 // soil calibrated parameters
 2.65253         // micbnup: parameter for soil microbial immobialization of N
-0.0057042       // kdcmoss: dead moss C decompositin rates at reference condition
 0.0507042       // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 0.0108046       // kdcsoma:
 0.0020805       // kdcsompr:
@@ -40,7 +39,6 @@ ptf %
 0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.0          // frg: NPP fraction for growth resp. 
 // soil calibrated parameters
 2.65253         // micbnup: parameter for soil microbial immobialization of N
-0.0057042       // kdcmoss: dead moss C decompositin rates at reference condition
 0.0507042       // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 0.0108046       // kdcsoma:
 0.0020805       // kdcsompr:
@@ -63,7 +61,6 @@ ptf %
 0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.0          // frg: fraction of available NPP (GPP after rm) for growth resp. 
 // soil calibrated parameters
 2.65253         // micbnup: parameter for soil microbial immobialization of N
-0.0057042       // kdcmoss: dead moss C decompositin rates at reference condition
 0.0507042       // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 0.0108046       // kdcsoma:
 0.0020805       // kdcsompr:
@@ -86,7 +83,6 @@ ptf %
 0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.0          // frg: fraction of available NPP (GPP after rm) for growth resp. 
 // soil calibrated parameters
 2.65253         // micbnup: parameter for soil microbial immobialization of N
-0.0057042       // kdcmoss: dead moss C decompositin rates at reference condition
 0.0507042       // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 0.0108046       // kdcsoma:
 0.0020805       // kdcsompr:
@@ -109,7 +105,6 @@ ptf %
 %frg0      % %frg1      % %frg2      % %frg3      % %frg4      % %frg5      % %frg6      % %frg7      % %frg8      % 0.0     // frg: frac of avail NPP (GPP after rm) for growth resp. 
 // soil calibrated parameters
 %micbnup   %    // micbnup: parameter for soil microbial immobialization of N
-%kdcmoss   %    // kdcmoss:
 %kdcrawc   %    // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 %kdcsoma   %    // kdcsoma:
 %kdcsompr  %    // kdcsompr:
@@ -132,11 +127,10 @@ ptf %
 0.20         0.20        0.20        0.30         0.20         0.10         0.20         0.20         0.0          0.0        // frg: fraction of available NPP (GPP after rm) for growth resp. 
 // soil calibrated parameters
 8.65         // micbnup: parameter for soil microbial immobialization of N
-0.009        // kdcmoss:
-0.07       // kdcrawc: raw-material (litter) C decompositin rates at reference condition
+0.07         // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 0.0097       // kdcsoma:
-0.001      // kdcsompr:
-0.00008     // kdcsomcr:
+0.001        // kdcsompr:
+0.00008      // kdcsomcr:
 //===========================================================
 // CMT06 // Wet Sedge Tundra - (max. 10 PFTs over 1 soil column) (BGC) plant calibrated parameters
 //Decid.     Sedges       Grasses      Forbs        Lichens      Feather      Sphag.       PFT7       PFT8         PFT9         // names: comments                  
@@ -155,7 +149,6 @@ ptf %
 0.20         0.20         0.20         0.20         0.20         0.20         0.20         0.0        0.0          0.0          // frg: fraction of available NPP (GPP after rm) for growth resp. 
 // soil calibrated parameters
 2.65253         // micbnup: parameter for soil microbial immobialization of N
-0.0057042       // kdcmoss: dead moss C decompositin rates at reference condition
 0.0507042       // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 0.0108046       // kdcsoma:
 0.0020805       // kdcsompr:
@@ -178,7 +171,6 @@ ptf %
 0.20         0.20         0.20         0.20         0.20         0.0        0.0         0.0        0.0          0.0          // frg: fraction of available NPP (GPP after rm) for growth resp. 
 // soil calibrated parameters
 2.65253         // micbnup: parameter for soil microbial immobialization of N
-0.0057042       // kdcmoss: dead moss C decompositin rates at reference condition
 0.0507042       // kdcrawc: raw-material (litter) C decompositin rates at reference condition
 0.0108046       // kdcsoma:
 0.0020805       // kdcsompr:
