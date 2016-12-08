@@ -15,10 +15,13 @@ usage () {
        -h, --help  Show this message and quit.
 
        -w, --workers   The program will print the last few lines of every worker's
-                   log file.
+                       log file.
 
        -m, --master    The program will use "tail -f" to look at the master's log
-                   file.
+                       file.
+
+       -c, --cancel    The progam will use squeue, grep, and awk to cancel all
+                       jobs beloning to $USER.
 
   "
 }
@@ -37,6 +40,12 @@ report_master() {
   tail -n 50 -f $WORKING_ROOT/master-00000.log
 }
 
+cancel_user_jobs() {
+  JOBID=$(squeue | grep $USER | awk '{print $1}') 
+  echo "Canceling $JOBID..."
+  scancel $JOBID
+}
+
 # Check that the user supplied at least one argument.
 if [[ "$#" -ne 1 ]]
 then
@@ -50,11 +59,15 @@ case $1 in
                     exit 0
                     ;;
 
-  -w | --workers )       report_workers
+  -w | --workers )  report_workers
                     exit 0
                     ;;
 
-  -m | --master )        report_master
+  -m | --master )   report_master
+                    exit 0
+                    ;;
+
+  -c | --cancel )   cancel_user_jobs
                     exit 0
                     ;;
 
