@@ -1,7 +1,7 @@
 pcf
 * control data
 restart  estimation
-122   78   18     0     10
+122   78   18     0     14
 1     1 double point   1   0   0
 20.0  -3   0.3  0.03    10
 3.0   3.0 0.001  0
@@ -155,8 +155,12 @@ kdcsoma      none relative   1.580460E-02  -1.000000E+10   1.000000E+10 kdcsoma 
 kdcsompr     none relative   2.080500E-03  -1.000000E+10   1.000000E+10 kdcsompr        1.0000        0.0000      1
 kdcsomcr     none relative   1.080000E-05  -1.000000E+10   1.000000E+10 kdcsomcr        1.0000        0.0000      1
 * observation groups
-soilc
-soiln
+mdc
+cshall
+cdeep
+cminsum
+onsum
+ansum
 nppa
 tnup
 vcl
