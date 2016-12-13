@@ -82,27 +82,28 @@
 #      directories with the setup-workers.sh --cleanup
 #  
 
-#SBATCH -n 73                # cores
+#SBATCH -n 105                # cores
 #SBATCH -t 1-13:00:00       # 1 day and 13 hours
 #SBATCH --partition main    # The partition 
 #SBATCH -J pestpp-cal       # sensible name for the job
-#SBATCH -w atlas11,atlas12,atlas15
-MASTERNODE="atlas11"
-NWORKERS=73
+#SBATCH -w atlas07,atlas08,atlas09,atlas12
+
+MASTERNODE="atlas07"
+NWORKERS=104
 WORKING_ROOT="/atlas_scratch/$USER"
 CASE_NAME="shrub_full"
 
 # Deal with the master process
 echo "Starting master process..."
 cd $WORKING_ROOT/master-00000 
-srun --partition main --nodelist=atlas11 -n 1 pestpp $CASE_NAME.pst /H :5050 > $WORKING_ROOT/master-00000.log 2>&1 &
+srun --partition main --nodelist=$MASTERNODE -n 1 pestpp $CASE_NAME.pst /H :5050 > $WORKING_ROOT/master-00000.log 2>&1 &
 echo "The srun exit status was: $?"
 echo "Created the master process..."
 
 # Wait, seems to help with making sure workers can connect...
 DELAY=30
 echo Start: $(date)
-echo "Waiting $DELAY second for the master to start before starting workers..."
+echo "Waiting $DELAY seconds for the master to start before starting workers..."
 sleep $DELAY
 echo End wait: $(date)
 
@@ -111,7 +112,7 @@ for (( i=1; i<=$NWORKERS; ++i ))
 do
   printf -v ZPNUM "%05d" $i # Zero padded number...
   cd $WORKING_ROOT/wrkr-$ZPNUM &&
-  srun -n 1 --partition main pestpp $CASE_NAME.pst /H atlas11:5050 > $WORKING_ROOT/wrkr-$ZPNUM.log 2>&1 &
+  srun -n 1 --partition main pestpp $CASE_NAME.pst /H $MASTERNODE:5050 > $WORKING_ROOT/wrkr-$ZPNUM.log 2>&1 &
   echo "Started worker number $ZPNUM..."
 done
 
