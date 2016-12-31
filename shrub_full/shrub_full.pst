@@ -32,24 +32,24 @@ kdcsoma      relative 0.05  0.0  switch  2.0 parabolic
 kdcsompr     relative 0.05  0.0  switch  2.0 parabolic
 kdcsomcr     relative 0.05  0.0  switch  2.0 parabolic
 * parameter data
-cmax0        none relative    255.000           1             200       cmax           1.0000        0.0000      1
-cmax1        none relative    625.000           1             250       cmax           1.0000        0.0000      1
-cmax2        none relative    83.0000           1             350       cmax           1.0000        0.0000      1
-cmax3        none relative    23.9000           1            3000       cmax           1.0000        0.0000      1
-cmax4        none relative    45.0000           1             150       cmax           1.0000        0.0000      1
-cmax5        none relative    66.8000           1             400       cmax           1.0000        0.0000      1
-cmax6        none relative    27.8000           1             400       cmax           1.0000        0.0000      1
-cmax7        none relative    38.8000           1             400       cmax           1.0000        0.0000      1
-cmax8        none relative    86.1000           1             400       cmax           1.0000        0.0000      1
-nmax0        none relative    4.50000           0.2             3       nmax           1.0000        0.0000      1
-nmax1        none relative    8.50000           0.2            12       nmax           1.0000        0.0000      1
-nmax2        none relative   0.810000           0.2            10       nmax           1.0000        0.0000      1
-nmax3        none relative   0.190000           0.2            20       nmax           1.0000        0.0000      1
+cmax0        none relative    255.000           1             1000      cmax           1.0000        0.0000      1
+cmax1        none relative    625.000           1             1000      cmax           1.0000        0.0000      1
+cmax2        none relative    83.0000           1             1000      cmax           1.0000        0.0000      1
+cmax3        none relative    23.9000           1             1000      cmax           1.0000        0.0000      1
+cmax4        none relative    45.0000           1             1000      cmax           1.0000        0.0000      1
+cmax5        none relative    66.8000           1             1000      cmax           1.0000        0.0000      1
+cmax6        none relative    27.8000           1             1000      cmax           1.0000        0.0000      1
+cmax7        none relative    38.8000           1             1000      cmax           1.0000        0.0000      1
+cmax8        none relative    86.1000           1             1000      cmax           1.0000        0.0000      1
+nmax0        none relative    4.50000           0.1            10       nmax           1.0000        0.0000      1
+nmax1        none relative    8.50000           0.1            12       nmax           1.0000        0.0000      1
+nmax2        none relative   0.810000           0.1            10       nmax           1.0000        0.0000      1
+nmax3        none relative   0.190000           0.1            20       nmax           1.0000        0.0000      1
 nmax4        none relative   0.230000           0.1             9       nmax           1.0000        0.0000      1
-nmax5        none relative   0.760000           0.2             9       nmax           1.0000        0.0000      1
-nmax6        none relative   0.290000           0.2             6       nmax           1.0000        0.0000      1
-nmax7        none relative   0.200000           0.2             9       nmax           1.0000        0.0000      1
-nmax8        none relative   0.100000           0.2             9       nmax           1.0000        0.0000      1
+nmax5        none relative   0.760000           0.1             9       nmax           1.0000        0.0000      1
+nmax6        none relative   0.290000           0.1             6       nmax           1.0000        0.0000      1
+nmax7        none relative   0.200000           0.1             9       nmax           1.0000        0.0000      1
+nmax8        none relative   0.100000           0.1             9       nmax           1.0000        0.0000      1
 cfalll0      none relative   8.300000E-02       0.0001          1       cfl            1.0000        0.0000      1
 cfalll1      none relative   8.300000E-02       0.0001          1       cfl            1.0000        0.0000      1
 cfalll2      none relative   8.300000E-02       0.0001          1       cfl            1.0000        0.0000      1
