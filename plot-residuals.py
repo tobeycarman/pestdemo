@@ -88,6 +88,18 @@ class FollowDotCursor(object):
 
 
 
+def histoplot_normal(ax, data, titlestring):
+   num_bins= 15
+   n, bins, patches = ax.hist(data, num_bins, normed=1, facecolor='blue', alpha = 0.5)
+   #y = mlab.normpdf(bins, np.mean(data), np.std(data))
+   #plt.plot(bins, y, 'k--')
+   ax.axvline(x=np.median(data), linewidth=1, color='r')
+   ax.axvline(x=np.mean(data), linewidth=1, color='k')
+   ax.set_title(titlestring, fontsize=14)
+   ax.set_xlabel('residuals', fontsize=14)
+   ax.set_ylabel('probability density', fontsize=14)
+   ax.tick_params(axis='x', labelsize=14)
+   ax.tick_params(axis='y', labelsize=14)
 
 
 
@@ -117,8 +129,13 @@ def main(file_list):
   #ax.xlabel("Measured")
   #ax.ylabel("Modeled")
   plt.legend()
-  
+
   cursor = FollowDotCursor(ax, measured*weights, modeled*weights, tolerance=20)
+
+
+  fig2, ax2 = plt.subplots()
+  histoplot_normal(ax2, residuals*weights, "WTF")
+
   
   plt.show(block=False)
   from IPython import embed; embed()
