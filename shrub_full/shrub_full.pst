@@ -3,7 +3,7 @@ pcf
 restart regularisation
      122      78      18     101      32
 1     1 double point   1   0   0
-20.0  -3   0.3  0.03    10
+10.0  -3   0.3  0.03    10
 3.0   3.0 0.001  0
 0.1
 20  .01      4     5  .001     4
@@ -184,9 +184,9 @@ regul_krb2
 regul_frg
 regul_micbnu
 regul_kdcraw
-regul_kdcsom
-regul_kdcsom
-regul_kdcsom
+regul_kda
+regul_kdpr
+regul_kdcr
 * observation data
  mdc                     178.000     9.7020000E-02          mdc
  cshall                  3079.00     1.2682407E-02       cshall
@@ -370,9 +370,9 @@ frg7          1.0 * log(frg7) = -0.6989700      1.0 regul_frg
 frg8          1.0 * log(frg8) = -0.6989700      1.0 regul_frg
 micbnup       1.0 * log(micbnup) =  0.4236603      1.0 regul_micbnu
 kdcrawc       1.0 * log(kdcrawc) =  -1.042373      1.0 regul_kdcraw
-kdcsoma       1.0 * log(kdcsoma) =  -1.801216      1.0 regul_kdcsom
-kdcsompr      1.0 * log(kdcsompr) =  -2.681832      1.0 regul_kdcsom
-kdcsomcr      1.0 * log(kdcsomcr) =  -4.966576      1.0 regul_kdcsom
+kdcsoma       1.0 * log(kdcsoma) =  -1.801216      1.0 regul_kda
+kdcsompr      1.0 * log(kdcsompr) =  -2.681832      1.0 regul_kdpr
+kdcsomcr      1.0 * log(kdcsomcr) =  -4.966576      1.0 regul_kdcr
 * regularisation
   1.0000000E-10  1.0500000E-10  0.1000000    
  1.0   1.0e-10    1.0e10
