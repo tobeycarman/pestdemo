@@ -104,7 +104,7 @@ def histoplot_normal(ax, data, titlestring):
 
 
 
-def main(file_list):
+def main(file_list, save_name, fmt, no_show):
 
   color_list = ['blue','red','green','black','orange','yellow','magenta','cyan']
 
@@ -130,15 +130,23 @@ def main(file_list):
   #ax.ylabel("Modeled")
   plt.legend()
 
+  if save_name != "":
+    full_name = save_name + "plot-measured-modeled." + fmt
+    plt.savefig(full_name)
   cursor = FollowDotCursor(ax, measured*weights, modeled*weights, tolerance=20)
 
 
-  fig2, ax2 = plt.subplots()
-  histoplot_normal(ax2, residuals*weights, "WTF")
 
-  
-  plt.show(block=False)
-  from IPython import embed; embed()
+  # NOW WORK ON THE HISTOGRAM
+  fig2, ax2 = plt.subplots()
+  histoplot_normal(ax2, residuals*weights, "histogram of residuals")
+
+  if save_name != "":
+    full_name = save_name + "plot-histo-resid." + fmt
+    plt.savefig(full_name)
+
+  if not no_show:
+    plt.show(block=True)
 
   
 
@@ -151,7 +159,9 @@ if __name__ == '__main__':
   )
 
   parser.add_argument('-f', '--files', default='', nargs="+", type=str, help="the file(s) to plot")
-
+  parser.add_argument('-s', '--save-name', default='', type=str, help="a nice nave for saving")
+  parser.add_argument('-m', '--format', default='pdf', choices=['png','pdf'], help="image format for saving")
+  parser.add_argument('-n', '--no-show', action='store_true', help="skip showing the plots")
   args = parser.parse_args()
   
-  main(args.files)
+  main(args.files, args.save_name, args.format, args.no_show)
